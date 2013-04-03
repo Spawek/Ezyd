@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+
+<script type="text/javascript">
+    function changeLang(lang) { //TODO make it looking better 
+        var curUrl = location.href.toString();
+        curUrl =curUrl.replace("/pl","").replace("/en","");
+
+        var curDomain = curUrl.match(/:\/\/(www\.)?(.[^/:]+)/)[2];
+
+        window.location = (curUrl.replace(curDomain, curDomain + "/" + lang));
+    }
+
+</script>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+</head>
+
+<body>
+    <div class="page">
+
+        <div id="header">
+            <div id="title">
+
+                <img src="@Url.Content("~/Images/ezyd2.jpg")" alt="ezyd" height="85" /> 
+            </div>
+
+
+            <div id="logindisplay">
+                @this.LclRes("WelcomeString") @ViewData["Firstname"] @ViewData["Lastname"] !
+                <br />
+                <br />
+                <a href="javascript:changeLang('pl')">Polski</a>   <a href="javascript:changeLang('en')">English</a>
+            </div>
+
+            <div id="menucontainer">
+
+                <ul id="menu">
+                    <li>@Html.ActionLink(this.LclRes("Home"), "Index", "Home")</li>
+                    <li>@Html.ActionLink(this.LclRes("Friends"), "Index", "Friends")</li>
+                    <li>@Html.ActionLink(this.LclRes("Transactions"), "Index", "Transaction")</li>
+                    <li>@Html.ActionLink(this.LclRes("Tutorial"),"Index", "Tutorial")</li>
+                </ul>
+
+            </div>
+        </div>
+
+        <div id="main">
+            @RenderBody()
+            <div id="footer">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

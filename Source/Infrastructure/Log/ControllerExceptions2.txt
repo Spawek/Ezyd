@@ -1,0 +1,28 @@
+﻿At time: 2012-02-14 22:46:36, on action executed following exception was NOT handled: System.Exception: noone has friends in this group
+   w ezyd.Models.TOptimalizator.optimizeTransactions(EzydDB DB, List`1 usersList) w D:\maciek\programowanie\facebook\ezyd\Models\ezyd\tableRecordStructures.cs:wiersz 1190
+   w ezyd.Controllers.HomeController.Test() w D:\maciek\programowanie\facebook\ezyd\Controllers\HomeController.cs:wiersz 206
+   w lambda_method(Closure , ControllerBase , Object[] )
+   w System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   w System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+At time: 2012-02-14 22:54:01, on action executed following exception was NOT handled: System.Exception: there are no transactions between people in this group
+   w ezyd.Models.TOptimalizator.optimizeTransactions(EzydDB DB, List`1 usersList) w D:\maciek\programowanie\facebook\ezyd\Models\ezyd\tableRecordStructures.cs:wiersz 1195
+   w ezyd.Controllers.HomeController.Test() w D:\maciek\programowanie\facebook\ezyd\Controllers\HomeController.cs:wiersz 206
+   w lambda_method(Closure , ControllerBase , Object[] )
+   w System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   w System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+At time: 2012-02-14 23:15:30, on action executed following exception was NOT handled: System.InvalidCastException: Określone rzutowanie jest nieprawidłowe.
+   w ezyd.Models.TOptimalizator.findUsersTransactions(EzydDB DB, List`1 usersList) w D:\maciek\programowanie\facebook\ezyd\Models\ezyd\tableRecordStructures.cs:wiersz 1010
+   w ezyd.Models.TOptimalizator.optimizeTransactions(EzydDB DB, List`1 usersList) w D:\maciek\programowanie\facebook\ezyd\Models\ezyd\tableRecordStructures.cs:wiersz 1193
+   w ezyd.Controllers.HomeController.Test() w D:\maciek\programowanie\facebook\ezyd\Controllers\HomeController.cs:wiersz 206
+   w lambda_method(Closure , ControllerBase , Object[] )
+   w System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   w System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)

@@ -1,0 +1,9 @@
+INSERT INTO exceptions (`message`, `data`, `stackTrace`, `date`) VALUES ('Nie można załadować pliku lub zestawu ?System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35? lub jednej z jego zależności. Nie można odnaleźć określonego pliku.', 'System.Collections.ListDictionaryInternal', '   w ezyd.Views.ResourcesHelper.Extentions.LclRes(WebViewPage page, String key)
+   w ASP._Page_Views_Home_Index_cshtml.Execute() w d:\maciek\programowanie\facebook\ezyd\PublishWeb\ezyd\Views\Home\Index.cshtml:wiersz 11
+   w System.Web.WebPages.WebPageBase.ExecutePageHierarchy()
+   w System.Web.Mvc.WebViewPage.ExecutePageHierarchy()
+   w System.Web.WebPages.StartPage.ExecutePageHierarchy()
+   w System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)
+   w System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   w System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)', NOW() )

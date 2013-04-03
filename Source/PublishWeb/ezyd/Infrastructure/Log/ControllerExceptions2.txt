@@ -1,0 +1,58 @@
+﻿At time: 2012-02-14 22:46:36, on action executed following exception was NOT handled: System.Exception: noone has friends in this group
+   w ezyd.Models.TOptimalizator.optimizeTransactions(EzydDB DB, List`1 usersList) w D:\maciek\programowanie\facebook\ezyd\Models\ezyd\tableRecordStructures.cs:wiersz 1190
+   w ezyd.Controllers.HomeController.Test() w D:\maciek\programowanie\facebook\ezyd\Controllers\HomeController.cs:wiersz 206
+   w lambda_method(Closure , ControllerBase , Object[] )
+   w System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   w System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+At time: 2012-02-14 22:54:01, on action executed following exception was NOT handled: System.Exception: there are no transactions between people in this group
+   w ezyd.Models.TOptimalizator.optimizeTransactions(EzydDB DB, List`1 usersList) w D:\maciek\programowanie\facebook\ezyd\Models\ezyd\tableRecordStructures.cs:wiersz 1195
+   w ezyd.Controllers.HomeController.Test() w D:\maciek\programowanie\facebook\ezyd\Controllers\HomeController.cs:wiersz 206
+   w lambda_method(Closure , ControllerBase , Object[] )
+   w System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   w System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+At time: 2012-02-14 23:15:30, on action executed following exception was NOT handled: System.InvalidCastException: Określone rzutowanie jest nieprawidłowe.
+   w ezyd.Models.TOptimalizator.findUsersTransactions(EzydDB DB, List`1 usersList) w D:\maciek\programowanie\facebook\ezyd\Models\ezyd\tableRecordStructures.cs:wiersz 1010
+   w ezyd.Models.TOptimalizator.optimizeTransactions(EzydDB DB, List`1 usersList) w D:\maciek\programowanie\facebook\ezyd\Models\ezyd\tableRecordStructures.cs:wiersz 1193
+   w ezyd.Controllers.HomeController.Test() w D:\maciek\programowanie\facebook\ezyd\Controllers\HomeController.cs:wiersz 206
+   w lambda_method(Closure , ControllerBase , Object[] )
+   w System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   w System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+At time: 24/03/2012 18:13:29, on action executed following exception was NOT handled: System.IO.IOException: Proces nie może uzyskać dostępu do pliku „D:\maciek\programowanie\facebook\ezyd\PublishWeb\ezyd\Infrastructure\Log\SqlQueries.txt”, ponieważ jest on używany przez inny proces.
+   w System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   w System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   w System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   w System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   w System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   w System.IO.StreamWriter..ctor(String path, Boolean append)
+   w ezyd.Models.DataBase.SqlQuery(String _SqlQuery) w D:\maciek\programowanie\facebook\ezyd\Models\ezyd\DataBase.cs:wiersz 105
+   w System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   w ezyd.Controllers.TransactionController.transactionPendingDisplay(Int32 tries) w D:\maciek\programowanie\facebook\ezyd\Controllers\TransactionController.cs:wiersz 414
+   w lambda_method(Closure , ControllerBase , Object[] )
+   w System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)
+At time: 11/05/2012 18:18:14, on action executed following exception was NOT handled: System.IO.IOException: Proces nie może uzyskać dostępu do pliku „D:\maciek\programowanie\facebook\ezyd\PublishWeb\ezyd\Infrastructure\Log\SqlQueries.txt”, ponieważ jest on używany przez inny proces.
+   w System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   w System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath)
+   w System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   w System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   w System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   w System.IO.StreamWriter..ctor(String path, Boolean append)
+   w ezyd.Models.DataBase.SqlQuery(String _SqlQuery) w D:\maciek\programowanie\facebook\ezyd\Models\ezyd\DataBase.cs:wiersz 105
+   w System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   w ezyd.Controllers.TransactionController.transactionPendingDisplay(Int32 tries) w D:\maciek\programowanie\facebook\ezyd\Controllers\TransactionController.cs:wiersz 414
+   w lambda_method(Closure , ControllerBase , Object[] )
+   w System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)

@@ -1,0 +1,194 @@
+﻿@{
+    ViewBag.Title = "transactionPendingDisplay";
+}
+
+<h2>@Html.ActionLink("transactions menu", "index")</h2>
+
+@Html.Partial("_MyFacebookLogin", "Shared")
+@Html.Partial("_EzydHelpers", "Shared")
+
+<script type="text/javascript">
+    approvePayment = function (transactionID, mGuyId) {
+        if (confirm("@Html.Raw(this.LclRes("Are you sure, that you want to approve payment"))" + transactionID)) {
+            $.ajax({
+                type: "POST",
+                traditional: true,
+                url: "/Transaction/approvePayment",
+                data: { TId: transactionID, minusGuyID: mGuyId },
+                success: function (result) {
+                    if (result["ok"] == '1') {
+                        alert('@this.LclRes("payment has been approved")');
+                        location.reload("true");
+                    }
+                    else {
+                        alert("error: " + result["msg"]);
+                    }
+                },
+                error: function (req, status, error) {
+                    alert('@this.LclRes("Sorry! We could not receive your feedback")');
+                }
+            });
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
+    suspendTransaction = function (transactionID, mGuyId, pGuyId) {
+        if (confirm("@this.LclRes("Are you sure, that you want to suspend transaction optimization")" + transactionID)) {
+            $.ajax({
+                type: "POST",
+                traditional: true,
+                url: "/Transaction/suspendTransaction",
+                data: { TId: transactionID, minusGuyID: mGuyId, plusGuyID: pGuyId },
+                success: function (result) {
+                    if (result["ok"] == '1') {
+                        alert('@this.LclRes("tranasction optimization has been suspended")');
+                        location.reload("true");
+                    }
+                    else {
+                        alert("error: " + result["msg"]);
+                    }
+                },
+                error: function (req, status, error) {
+                    alert('@this.LclRes("Sorry! We could not receive your feedback")');
+                }
+            });
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
+    resumeTransaction = function (transactionID, mGuyId, pGuyId) {
+        if (confirm("@Html.Raw(this.LclRes("Are you sure, that you want to resume transaction optimization"))" + transactionID)) {
+            $.ajax({
+                type: "POST",
+                traditional: true,
+                url: "/Transaction/resumeTransactionOptimization",
+                data: { TId: transactionID, minusGuyID: mGuyId, plusGuyID: pGuyId },
+                success: function (result) {
+                    if (result["ok"] == '1') {
+                        alert('@this.LclRes("tranasction optimization has been resumed")');
+                        location.reload("true");
+                    }
+                    else {
+                        alert("error: " + result["msg"]);
+                    }
+                },
+                error: function (req, status, error) {
+                    alert('@this.LclRes("Sorry! We could not receive your feedback")');
+                }
+            });
+        }
+    }
+
+</script>
+
+
+
+<h2>@this.LclRes("Debtors")</h2>
+
+<table align="center">
+<tr>
+<td>@this.LclRes("transaction ID")</td>
+<td>@this.LclRes("plus guy")</td>
+<td>@this.LclRes("minus guy")</td>
+<td>@this.LclRes("value")</td>
+<td>@this.LclRes("currency")</td>
+<td>@this.LclRes("date")</td>
+</tr>
+@{
+    int i = 0;
+}
+@foreach (var item in (System.Collections.Generic.IEnumerable<ezyd.Models.TPenRecord>)ViewData["TPenRecsPlus"])
+{
+
+    <tr>
+    <td>@item.transactionID</td>
+    <td>
+        <div name='@item.plusGuyID' ></div>
+        <script type="text/javascript">
+            userIdToName('@(item.plusGuyID)'); 
+        </script>
+    </td>
+    <td>
+        <div name='@item.minusGuyID' ></div>
+        <script type="text/javascript">
+            userIdToName('@(item.minusGuyID)'); 
+        </script>
+    </td>
+    <td>
+        <div id="value @(i)"></div>
+        <script type="text/javascript">
+            document.getElementById("value @(i)").innerHTML = valueDeconverter("@(item.value)");
+        </script>
+    </td>
+    <td>@item.currency</td>
+    <td>@item.date</td>
+    <td><input type="button" value="@this.LclRes("approve payment")" onclick="approvePayment('@item.transactionID', '@item.minusGuyID')" /></td> @*check if works*@
+    </tr>
+    i++;
+}
+</table>
+
+<br />
+<br />
+
+<h2>@this.LclRes("your debts")</h2>
+<table align="center">
+<tr>
+<td>@this.LclRes("transaction ID")</td>
+<td>@this.LclRes("plus guy")</td>
+<td>@this.LclRes("minus guy")</td>
+<td>@this.LclRes("value")</td>
+<td>@this.LclRes("currency")</td>
+<td>@this.LclRes("date")</td>
+<td>@this.LclRes("optimization suspended")</td>
+</tr>
+@{
+    i = 0;
+}
+@foreach (var item in (System.Collections.Generic.IEnumerable<ezyd.Models.TPenRecord>)ViewData["TPenRecsMinus"])
+{
+
+    <tr>
+    <td>@item.transactionID</td>
+    <td>
+        <div name='@item.plusGuyID' ></div>
+        <script type="text/javascript">
+            userIdToName('@(item.plusGuyID)'); 
+        </script>
+    </td>
+    <td>
+        <div name='@item.minusGuyID' ></div>
+        <script type="text/javascript">
+            userIdToName('@(item.minusGuyID)'); 
+        </script>
+    </td>
+    <td>
+        <div id="value2 @(i)"></div>
+        <script type="text/javascript">
+            document.getElementById("value2 @(i)").innerHTML = valueDeconverter("@(item.value)");
+        </script>
+    </td>
+    <td>@item.currency</td>
+    <td>@item.date</td>
+    <td>
+    @if (item.optimizationSuspended != 0)
+    {
+        <input type="button" onclick="resumeTransaction(@item.transactionID, @item.minusGuyID, @item.plusGuyID)" value="@this.LclRes("resume optimization")" />
+    }
+    else
+    {
+        <input type="button" onclick="suspendTransaction(@item.transactionID, @item.minusGuyID, @item.plusGuyID)" value="@this.LclRes("suspend optimization")" />
+    }
+    </td>
+
+    </tr>
+    i = i + 1;
+}
+</table>
+
+
+<br /><br /><fb:login-button autologoutlink="true"></fb:login-button>

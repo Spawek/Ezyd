@@ -1,0 +1,63 @@
+﻿<div id="fb-root">
+</div>
+@* to też potrzebne *@
+<script type="text/javascript" src='//connect.facebook.net/en_US/all.js'>
+    //bez tego nie dziala na chromie
+</script>
+<script type="text/javascript">
+    //bez tego nie dziala na operze
+    (function () {
+        var e = document.createElement('script');
+        e.type = 'text/javascript';
+        e.src = document.location.protocol +
+            '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+    } ());
+    //na IE działa chujowo ale działa
+</script>
+<script type="text/javascript">
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '241822175888190',
+            status: true,
+            cookie: true,
+            xfbml: true,
+            oauth: true,
+            channelUrl: "http://ezydapplication.no-ip.org/" //FROM: http://piotrekkr.info/2010/11/opera-facebook-problemy/ //TODO: its not working at opera anyway ;/ - FIX IT
+        });
+
+        if (window.opera) //FROM: http://piotrekkr.info/2010/11/opera-facebook-problemy/
+        {
+	        // zmieniam tranport na postmessage
+	        // bo opera nie radzi sobie z domyślnym
+	        FB.XD._transport="postmessage";
+	        FB.XD.PostMessage.init();
+	    }
+
+        /* All the events registered */
+        FB.Event.subscribe('auth.login', function (response) {
+            // do something with response
+            //login(); //TODO fix it //I dont know if i need it
+        });
+        FB.Event.subscribe('auth.logout', function (response) {
+            // do something with response
+            //logout(); //TODO fix it
+        });
+
+        FB.getLoginStatus(function (response) {
+            if (response.session) {
+                // logged in and connected user, someone you know
+                login();
+            }
+        });
+    };
+
+    //FROM: http://piotrekkr.info/2010/11/opera-facebook-problemy/
+    (function () {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol +
+		'//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+    } ());
+</script>

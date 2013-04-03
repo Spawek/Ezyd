@@ -1,0 +1,12 @@
+  <bindings>
+    <basicHttpBinding>
+        <binding name="QBService_BasicHttpBinding">
+            <security mode="Transport">
+                <transport clientCredentialType="None" />
+            </security>
+            <readerQuotas maxDepth="15" maxStringContentLength="524288" maxArrayLength="16384" maxBytesPerRead="4096" maxNameTableCharCount="16384" />
+        </binding>
+    </basicHttpBinding>
+</bindings>
+
+    <compilation debug="true" targetFramework="4.0">

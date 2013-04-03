@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "SendFriendInvitations";
+}
+
+<h2>@this.LclRes("Go back to the") @Html.ActionLink(this.LclRes("friends menu"), "index")</h2>
+
+@Html.Partial("_MyFacebookLogin", "Shared")
+@Html.Partial("_EzydHelpers", "Shared")
+
+<script type="text/javascript">
+    var FLdone = false;
+    var friendListNames = new Array();
+    var friendListIds = new Array();
+
+    function getFL() {
+        FB.api("/me/friends", { fields: 'id,name' }, function (response) {
+            for (var key in response.data) {
+                friendListIds.push(response.data[key].id);
+                friendListNames.push(response.data[key].name);
+            }
+        });
+        FLdone = true;
+    }
+
+    function findFriends2(name) {
+        if (!FLdone) {
+            getFL();
+        }
+
+        var friends2 = "";
+        if (name == "") {
+            table = ""
+        }
+        else {
+            var pattern = new RegExp(name, 'i'); //if string contains the name (letter cases are not important)
+            friends2 = "<table>";
+            for (var i = 0; i < friendListNames.length; i++) {
+                if (pattern.test(friendListNames[i])) {
+                    friends2 += "<tr>";
+                    friends2 += "<td>" + friendListNames[i] + "</td><td> " + "<img src='http://graph.facebook.com/" + friendListIds[i] + "/picture' /></td>";
+                    buttonOnClick = "sendInv('" + friendListIds[i] + "')"; //nie wygląda to za ładnie ale działa ;)
+                    buttonOnClick = 'onclick="' + buttonOnClick + '"';
+                    friends2 += "<td> <input type='button' " + buttonOnClick + " value='@this.LclRes("add")' /> </td>";
+                    friends2 += "</tr>";
+                }
+            }
+            friends2 += "</table>";
+        }
+
+        document.getElementById("findFriends2").innerHTML = friends2;
+    }
+</script>
+
+<script type="text/javascript">
+    function findFriends(name) {
+        var params = {};
+        params["q"] = name;
+        params["type"] = "user";
+        FB.api("/search", params, function (response) {
+            var friends = "<table>";
+            for (key in response.data) {
+                friends += "<tr>";
+                friends += "<td>" + ((+key) + 1).toString() + "</td> <td>" + response.data[key].name + "</td><td> " + "<img src='http://graph.facebook.com/" + response.data[key].id + "/picture' /></td>";
+                buttonOnClick = "sendInv('" + response.data[key].id.toString() + "')"; //nie wygląda to za ładnie ale działa ;)
+                buttonOnClick = 'onclick="' + buttonOnClick + '"';
+                friends += "<td> <input type='button' " + buttonOnClick + " value='@this.LclRes("add")' /> </td>";
+                friends += "</tr>";
+            }
+            friends += "</table>";
+
+            document.getElementById("findFriends").innerHTML = friends;
+        });
+    }
+
+    this.sendInv = function (guyId) {
+        if (confirm('@Html.Raw(this.LclRes("Are you sure you want to send friend invitation"))')) {
+            $.ajax(
+                {
+                    type: "POST",
+                    traditional: true,
+                    url: "/Friends/SendFriendInv",
+                    data: { FId: guyId },
+                    success: function (result) {
+                        if (result["ok"] == '1') {
+                            alert('@this.LclRes("friend invitation has been sent")');
+                            location.reload("true");
+                        }
+                        else {
+                            alert(result["msg"]);
+                        }
+                    },
+                    error: function (req, status, error) {
+                        alert('@this.LclRes("Sorry! We could not receive your feedback at this time.")');
+                    }
+                });
+        }
+    }
+</script>
+
+<div id="friendlistSearchEngine">
+    <h5>@this.LclRes("Friendlist search engine")</h5>
+    <input type="text" value="@this.LclRes("firstname lastname")" id="friendName2" onkeyup="findFriends2(this.value)" />
+    <input type="button" value="@this.LclRes("search")" onclick="findFriends2(document.getElementById('friendName2').value)" />
+</div>
+<div id="findFriends2"></div>
+
+
+<div id="friendNameInput">
+    <br />
+    <h5>@this.LclRes("Facebook friends search engine:")</h5>
+    <input type="text" value="@this.LclRes("firstname lastname")" id="friendName" onkeyup="findFriends(this.value)" />
+    <input type="button" value="@this.LclRes("search")" onclick="findFriends(document.getElementById('friendName').value)" />
+    <br /><br />
+</div>
+<div id="findFriends"></div>
+
+
+<fb:login-button autologoutlink="true"></fb:login-button>

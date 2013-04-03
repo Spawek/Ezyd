@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "JQueryTest";
+}
+
+<h2>JQueryTest</h2>
+
+<script src="@Url.Content("~/Scripts/jquery-1.4.4-vsdoc.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    jQuery.ajaxSettings.traditional = true; //co to niby daje to nie wiem, ale podobno bez tego nie działas
+
+    $(function () {
+
+        $(".testLink").click(function () {
+
+            var backMsg = $("#testInput").value;
+            if (backMsg == "" || backMsg == null) {
+                //alert("backMsg is empty"); //TODO WHY IT IS EMPTY???
+
+                var ids = Array();
+                ids.push('1');
+                ids.push('2');
+                ids.push('3');
+
+                var values = Array();
+                values.push('huj');
+                values.push('dupa');
+                values.push('cycki');
+
+                backMsg = { id: ids, value: values};
+
+
+
+
+                /*
+                backMsg = [{ name: "kurwa_dziala1", value: "b" },
+                { name: "kurwa_dziala2", value: "b" },
+                { name: "kurwa_dziala3", value: "b" },
+                { name: "kurwa_dziala4", value: "b" },
+                { name: "kurwa_dziala5", value: "b" }
+                ];
+                */
+
+            }
+
+            //posting 
+            $.post("/Home/TestAddItem", backMsg,
+              function (data) {
+                  document.getElementById("postTest").innerHTML = ("data.msg= " + data.msg);
+                  document.getElementById("postTest").innerHTML += ("<br /> data.item= " + data.item);
+              });
+        });
+    });
+</script>
+
+<input type="text" value="backMsg" id="testInput" name="testInput" />
+<br />
+<a href="#" class="testLink">Test post link</a>
+
+<script type="text/javascript">
+    //alert($("#testInput").value);
+</script>
+ 
+ <br />
+ <div id="postTest"></div>

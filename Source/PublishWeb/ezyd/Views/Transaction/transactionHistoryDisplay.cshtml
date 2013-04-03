@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "transactionHistoryDisplay";
+}
+
+<h2>@Html.ActionLink("transactions menu", "index")</h2>
+
+@Html.Partial("_MyFacebookLogin", "Shared")
+@Html.Partial("_EzydHelpers", "Shared")
+
+<script type="text/javascript">
+    userIdToName = function (ID) {
+        FB.api({
+            method: 'fql.query',
+            query: "SELECT name FROM user WHERE uid=" + ID
+        },
+        function (response) {
+            var temp = document.getElementsByName(ID)
+            for (var i = 0; i < temp.length; i++) {
+                temp[i].innerHTML = "<img src='http://graph.facebook.com/" + ID + "/picture' />"
+                temp[i].innerHTML += response[0].name; //need to change only last element
+            }
+        });
+    }
+</script>
+
+
+<table align="center">
+<tr>
+<td>transaction ID</td>
+<td>plus guy</td>
+<td>minus guy</td>
+<td>value</td>
+<td>currency</td>
+<td>date</td>
+<td>fulfill</td>
+<td>description</td>
+</tr>
+@foreach (var item in (System.Collections.Generic.IEnumerable<ezyd.Models.THisRec>)ViewData["THisList"])
+{
+    <tr>
+    <td>@item.transactionID</td>
+    <td>
+        <div name='@item.plusGuyID' ></div>
+        <script type="text/javascript">
+            userIdToName('@(item.plusGuyID)'); 
+        </script>
+    </td>
+    <td>
+        <div name='@item.minusGuyID' ></div>
+        <script type="text/javascript">
+            userIdToName('@(item.minusGuyID)'); 
+        </script>
+    </td>
+    <td>@item.value</td>
+    <td>@item.currency</td>
+    <td>@item.date</td>
+    <td>@item.fulfillDate</td>
+    <td>@item.description</td>
+    </tr>
+}
+</table>
+
+<br /><br /><fb:login-button autologoutlink="true"></fb:login-button>

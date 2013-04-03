@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "acceptedTransactionsHistoryDisplay";
+}
+
+<h2>@this.LclRes("Go back to") @Html.ActionLink(this.LclRes("transactions menu"), "index")</h2>
+
+
+@Html.Partial("_MyFacebookLogin", "Shared")
+@Html.Partial("_EzydHelpers", "Shared")
+
+<table align="center">
+<tr>
+    <td>@this.LclRes("transaction ID")</td>
+    <td>@this.LclRes("user")</td>
+    <td>@this.LclRes("value")</td>
+    <td>@this.LclRes("currency")</td>
+    <td>@this.LclRes("date")</td>
+    <td>@this.LclRes("description")</td>
+</tr>
+@{
+    UInt32 lastTransaction = 0;
+    int i = 0;
+}
+@foreach (var item in (System.Collections.Generic.IEnumerable<ezyd.Models.TReqRec>)ViewData["TReqs"])
+{
+
+    if (lastTransaction != 0 && lastTransaction != item.transactionID)
+    {
+        <tr style="border-style: none">
+            <td style="border-style: none">
+                <br /><br /><br /><br />
+                <div id ="transactionName @(item.transactionID)"></div>
+            </td>
+        </tr>
+    }
+    lastTransaction = item.transactionID;
+
+    if (item.userID == 0)
+    {
+        <script type="text/javascript">
+            document.getElementById("transactionName @(item.transactionID)").innerHTML = "<h4>@(item.description)</h4>";
+        </script>
+    }
+    else
+    {
+        <tr>
+        <td>@item.transactionID</td>
+        <td>
+            <div name='@item.userID' ></div>
+            <script type="text/javascript">
+                userIdToName('@(item.userID)'); 
+            </script>
+        </td>
+        <td>
+            <div id="value @(i)"></div>
+            <script type="text/javascript">
+                document.getElementById("value @(i)").innerHTML = valueDeconverter("@(item.value)");
+            </script>
+        </td>
+        <td>@item.currency</td>
+        <td>@item.date</td>
+        <td>@item.description</td>
+        </tr>
+    }
+    i++;
+}
+</table>
+
+
+<br /><br /><fb:login-button autologoutlink="true"></fb:login-button>

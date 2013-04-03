@@ -1,0 +1,59 @@
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254609, 100000907961641, 123312321, 150, 'EUR', NOW(),  ), (746254601, 100000907961641, 123312321, 16400, 'PLN', NOW(), ' ' )
+MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '), (746254601, 100000907961641, 123312321, 16400, 'PLN', NOW(), ' ' )' at line 1
+   w MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   w MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int32& insertedId)
+   w MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int32& insertedId)
+   w MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   w MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   w MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   w MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   w MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   w ezyd.Models.DataBase.SqlNonQuery(String _SqlQuery) w D:\maciek\programowanie\facebook\ezyd\Models\ezyd\DataBase.cs:wiersz 126
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601AND `minusGuyId` = 100000907961641AND `plusGuyID` = 123312321
+MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '`minusGuyId` = 100000907961641AND `plusGuyID` = 123312321' at line 1
+   w MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   w MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int32& insertedId)
+   w MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int32& insertedId)
+   w MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   w MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   w MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   w MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   w MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   w ezyd.Models.DataBase.SqlNonQuery(String _SqlQuery) w D:\maciek\programowanie\facebook\ezyd\Models\ezyd\DataBase.cs:wiersz 126
+INSERT INTO exceptions (`message`, `data`, `stackTrace`, `date`) VALUES ('Element „string” nie zawiera definicji „dupa”.',`System.Collections.ListDictionaryInternal`, `   w CallSite.Target(Closure , CallSite , Object )
+   w System.Dynamic.UpdateDelegates.UpdateAndExecuteVoid1[T0](CallSite site, T0 arg0)
+   w ezyd.Controllers.HomeController.Index() w D:\maciek\programowanie\facebook\ezyd\Controllers\HomeController.cs:wiersz 157
+   w lambda_method(Closure , ControllerBase , Object[] )
+   w System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   w System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)`, 26/06/2012 11:57:57)
+MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(Co' at line 1
+   w MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   w MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int32& insertedId)
+   w MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int32& insertedId)
+   w MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   w MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   w MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   w MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   w ezyd.Models.DataBase.SqlNonQuery(String _SqlQuery) w D:\maciek\programowanie\facebook\ezyd\Models\ezyd\DataBase.cs:wiersz 127
+INSERT INTO exceptions (`message`, `data`, `stackTrace`, `date`) VALUES ('Element „string” nie zawiera definicji „dupa”.',`System.Collections.ListDictionaryInternal`, `   w CallSite.Target(Closure , CallSite , Object )
+   w ezyd.Controllers.HomeController.Index() w D:\maciek\programowanie\facebook\ezyd\Controllers\HomeController.cs:wiersz 157
+   w lambda_method(Closure , ControllerBase , Object[] )
+   w System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   w System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)`, 26/06/2012 11:58:03)
+MySql.Data.MySqlClient.MySqlException (0x80004005): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(Co' at line 1
+   w MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   w MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int32& insertedId)
+   w MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int32& insertedId)
+   w MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   w MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   w MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   w MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   w ezyd.Models.DataBase.SqlNonQuery(String _SqlQuery) w D:\maciek\programowanie\facebook\ezyd\Models\ezyd\DataBase.cs:wiersz 127

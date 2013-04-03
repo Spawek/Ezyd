@@ -1,0 +1,250 @@
+﻿@{
+    ViewBag.Title = "JsTest";
+}
+
+<h2>JsTest</h2>
+
+<script type="text/javascript", src="@Url.Content("~/Scripts/jquery-1.4.4.js")"></script>
+<script type="text/javascript", src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
+
+
+<script type="text/javascript">
+    function User(userID, firstName, surName, value) 
+    {
+        this.userID = userID;
+        this.firstName = firstName;
+        this.surName = surName;
+        this.value = value;
+
+        this.display = function () {
+            var dispTemp = "user:";
+
+            dispTemp += "<BR>ID:";
+            dispTemp += userID;
+
+            dispTemp += "<BR>firstName:";
+            dispTemp += firstName;
+
+            dispTemp += "<BR>surName:";
+            dispTemp += surName;
+
+            dispTemp += "<BR>value:";
+            dispTemp += value;
+
+            document.writeln(dispTemp);
+        }
+    }
+
+    function updateDate() {
+        document.getElementById("demo").innerHTML = Date();
+    }
+
+    function confDial() {
+        var r = confirm("Press a button");
+        if (r==true){
+            alert("You pressed OK!");
+        }
+        else{
+            alert("You pressed Cancel!");
+        }
+    }
+
+    function show_prompt() {
+        var name = prompt("Please enter your name", "Harry Potter");
+        if (name != null && name != "") {
+            document.write("Hello " + name + "! How are you today?");
+        }
+    }
+
+    function setCookie(c_name, value, exdays) {
+        var exdate = new Date();
+        exdate.setDate(exdate.getDate() + exdays);
+        var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+        document.cookie = c_name + "=" + c_value;
+    }
+
+    function getCookie(c_name) {
+        var i, x, y, ARRcookies = document.cookie.split(";");
+        for (i = 0; i < ARRcookies.length; i++) {
+            x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+            y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+            x = x.replace(/^\s+|\s+$/g, "");
+            if (x == c_name) {
+                return unescape(y);
+            }
+        }
+    }
+
+    //useless
+    function checkCookie() {
+        var username = getCookie("username");
+        if (username != null && username != "") {
+            alert("Welcome again " + username);
+        }
+        else {
+            username = prompt("Please enter your name:", "");
+            if (username != null && username != "") {
+                setCookie("username", username, 365);
+            }
+        }
+    }
+
+    function visitCounterCookie() {
+        var counter = getCookie("visitCounter");
+        if (counter == null || counter == "") {
+            setCookie("visitCounter", 1, 30);
+            return 0;
+        }
+        else {
+            setCookie("visitCounter", ++counter, 30);
+            return counter;
+        }
+
+    }
+
+    function guyList(listName) {
+
+        this.listName = listName;
+        this.whereToDisplay;
+        this.firstName = new Array();
+        this.lastName = new Array();
+        this.size = 0;
+
+        this.addGuy = function (firstName, lastName) {
+            this.firstName[this.size] = firstName;
+            this.lastName[this.size] = lastName;
+            this.size++;
+            if (this.whereToDisplay != null || this.whereToDisplay != "") {
+                this.display(this.whereToDisplay);
+            }
+            else {
+                alert("whereToDisplay is empty in: " + this.listName);
+            }
+        }
+
+        this.deleteGuy = function (no) {
+            if (no < this.size && no > 0) {
+                for (var i = no; i < this.size - 1; i++) {
+                    this.firstName[i] = this.firstName[i + 1];
+                    this.lastName[i] = this.lastName[i + 1];
+                }
+            }
+        }
+
+        this.display = function (divID) {
+            this.whereToDisplay = divID;
+            var table;
+            table += "<table border='1'> ";
+            table += "<tr> <td> First name </td> <td> Last name </td> </tr> "; //top of the table
+            for (var i = 0; i < this.size; i++) {
+                table += "<tr> <td>";
+                table += this.firstName[i];
+                table += "</td> <td>"
+                table += this.lastName[i];
+                table += "</td>";
+                table += "</tr> ";
+            }
+
+            document.getElementById("arr").innerHTML = table;
+        }
+
+        
+    }
+ 
+</script>
+
+
+
+<script type="text/javascript">
+    document.writeln("test1:<BR><BR>");
+
+    var maciek = new User(4324324, "Maciek", "Oz", 4323);
+    maciek.display();
+
+</script>
+
+<br /> <br />
+
+<p id="demo">This is a paragraph.</p>
+
+<script type="text/javascript">
+    document.getElementById("demo").innerHTML = Date();
+</script>
+
+ <br /><br />
+
+<input type="button" onclick="updateDate()" value="Update date" />
+
+<br /><br />
+
+<input type="button" onclick="confDial()" value="Confirmation dialog" />
+
+<br /><br />
+
+<input type="button" onclick="show_prompt()" value="Show prompt box" />
+
+<br /><br />
+
+<div id="example"></div>
+
+<script type="text/javascript">
+    txt = "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
+    txt += "<p>Browser Name: " + navigator.appName + "</p>";
+    txt += "<p>Browser Version: " + navigator.appVersion + "</p>";
+    txt += "<p>Cookies Enabled: " + navigator.cookieEnabled + "</p>";
+    txt += "<p>Platform: " + navigator.platform + "</p>";
+    txt += "<p>User-agent header: " + navigator.userAgent + "</p>";
+
+    document.getElementById("example").innerHTML = txt;
+
+</script>
+
+<br /><br />
+
+<div id="cookieTest"></div>
+
+<script type="text/javascript">
+    document.getElementById("cookieTest").innerHTML = "dupa";
+    document.writeln(visitCounterCookie());
+    //document.getElementById("cookieTest").innerHTML = visitCounterCookie();
+</script>
+
+<div id="tekst" title = "event onmouseover test" >
+<input type="text" onmouseover = "alertDUPA( 'kurwa mój tekst ' )" value="MÓJ TEKST"/>
+</div>
+
+
+<div id="arr"></div>
+
+<script type="text/javascript">
+    GuyList = new guyList("list1");
+    GuyList.display("arr");
+</script>
+
+
+
+
+<div id="form test">
+    First Name: <input type="text" value="mac" id="firstName"/>
+    Last Name: <input type="text" value="ozi" id="lastName" />
+    <input type="button" value="add to array" name="addButton" onclick="GuyList.addGuy( document.getElementById('firstName').value,  document.getElementById('lastName').value )" />
+</div>
+
+
+<div id="testTEST">
+    <h5>
+    <br />
+    TEST msg 
+    </h5>
+</div>
+
+<script type="text/javascript">
+
+    if (document.getElementById("firstName") == null || document.getElementById("firstName") == "") {
+        document.getElementById("testTEST").innerHTML = "nie ma takiego elementu";
+    } else {
+        document.getElementById("testTEST").innerHTML = "ten element to:";
+        document.getElementById("testTEST").innerHTML += document.getElementById('firstName').value;
+    }
+    
+</script>

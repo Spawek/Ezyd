@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "transactionHistoryDisplay";
+}
+
+<h2>@this.LclRes("Go back to") @Html.ActionLink(this.LclRes("transactions menu"), "index")</h2>
+
+@Html.Partial("_MyFacebookLogin", "Shared")
+@Html.Partial("_EzydHelpers", "Shared")
+
+
+<table align="center">
+<tr>
+<td>@this.LclRes("transaction ID")</td>
+<td>@this.LclRes("plus guy")</td>
+<td>@this.LclRes("minus guy")</td>
+<td>@this.LclRes("value")</td>
+<td>@this.LclRes("currency")</td>
+<td>@this.LclRes("fulfill")</td>
+</tr>
+@{
+    int i = 0;
+}
+@foreach (var item in (System.Collections.Generic.IEnumerable<ezyd.Models.THisRec>)ViewData["THisList"])
+{
+    <tr>
+    <td>@item.transactionID</td>
+    <td>
+        <div name='@item.plusGuyID' ></div>
+        <script type="text/javascript">
+            userIdToName('@(item.plusGuyID)'); 
+        </script>
+    </td>
+    <td>
+        <div name='@item.minusGuyID' ></div>
+        <script type="text/javascript">
+            userIdToName('@(item.minusGuyID)'); 
+        </script>
+    </td>
+    <td>
+        <div id="value @(i)"></div>
+        <script type="text/javascript">
+            document.getElementById("value @(i)").innerHTML = valueDeconverter("@(item.value)");
+        </script>
+
+    </td>
+    <td>@item.currency</td>
+    <td>@item.fulfillDate</td>
+    </tr>
+    i = i + 1;
+}
+</table>
+
+<br /><br /><fb:login-button autologoutlink="true"></fb:login-button>

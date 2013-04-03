@@ -1,0 +1,55 @@
+﻿1.07 - 20 luty 2012:
+	- dodano wyszukiwanie ludzi za pomocą friendlisty
+	- bieżący użytkownik jest dodawany do nowej transakcji
+	- transakcje z wartością 0 nie będą już dodawane do pending
+	- przy dodawaniu nowej transakcji wszystkie transakcje pomiędzy userami, którzy uczestniczą transakcje się optymalizują
+	- naprawiony wygląd nazwy transakcji
+	- wywalono opis i czas transakcji z UI przy transactions pending history (nie z DB!)
+	- wywalono opis transakcji z UI przy transactions pending (nie z DB!)
+
+1.08 - 23 luty 2012:
+	- dodano obsługę języków za pomocą routingu strony (domyślny język jest brany z ustawień przeglądarki)
+	- dodano przyciski zmiany języka (których kod w JS nie jest zachwycający...)
+
+1.09 - 24 luty 2012:
+	- spolszczono:
+		- _layout, _uNotLogged
+		- home/index
+		- transactionCreator, transactionPendingDisplay, transactionRequestDisplay
+		- accAndExeTransactionTutorial, createNewTransactionTutorial
+ 
+  25 luty 2012:
+	- spolszczono więcej stron
+
+1.10 26 luty 2012:
+	- naprawiono obsugę polskich znaków (komunikacja c# -> MySQL)
+	- spolszczono jeszcze więcej
+	- tytuł transakcji już nie kasuje się po dodaniu/usunięciu jakiejś osoby
+	- dorobiono transaction optimization suspention
+
+1.11 27 luty 2012:
+	- teraz bieżący użytkownik jest dodawany do forma przy transactions optimization
+	- przetłumaczono już chyba całą aplikację
+
+1.12 3 marzec 2012(pociąg ;)):
+	- dodano (spolszczony) tutorial do suspend transaction
+
+1.13 22 czewiec 2012 (tyle czasu minęło!):
+	- naprawiono rzadki bug nie pozwalający zoptymalizować transakcji do stanu 0 (czyli, że nie ma żadnych transakcji)
+
+1.13 23 czerwiec 2012 (trzeba w końcu naprawić pare buggów):
+	- naprawiono komunikaty w View 'transaciton optimalization'
+	- naprawiono brak litery 'ó' w allertach i confirmach - było trzeba zmienić przy przy pobieraniu z resources (za pomocą @this.LclRes(wpis))) na 
+		@Html.Raw(this.LclRes(wpis)), confirmy zrobione ręcznie (bo były chyba 4), allerty za pomocą replace 
+		z {alert\(}"{\@}{this\.LclRes\(".*"\)}" na \1'\2Html.Raw(\3)'
+		(na razie zmienione tylko w transactionRequestDisplay - zmienić w reszcie plików!!!!!!!!!!!!! - i przetestować)
+
+25 czerwiec 2012:
+	- dodano nowy tryb wprowadzania transacji "money transfer"
+
+26 czerwiec 2012:
+	- logowanie wyjątków i zapytań SQL (dobrych i złych osobno) teraz (w pierwszej kolejności) idzie do DB, a nie do pliku, w razie gdy zapis do DB się nie powiedzie wpis idzie do pliku
+	- porządny refactor kodu do tworzenia logów
+	- dodano blokowanie optymalizacji, tak, żeby w 1 czasie mogła działać tylko 1 optymalizacja (mogłyby w dziwny sposób ze sobą oddziaływać)
+	- naprawiono syf w nazwach w transactions
+	- naprawiono bug powodujący pokazania, że wszyscy użytkownicy zaakceptowali odwołane transakcje - błędne tłumaczenie w transactions cancelled ("false" przetłumaczone jako "tak")

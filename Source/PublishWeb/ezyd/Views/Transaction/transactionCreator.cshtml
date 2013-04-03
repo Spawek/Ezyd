@@ -1,0 +1,634 @@
+﻿@{
+    ViewBag.Title = "transactionCreator";
+}
+<h2>@Html.ActionLink(this.LclRes("transactions menu"), "index")</h2>
+
+
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script> @* //TODO sprawdzić czy potrzebne i ew wyjebać *@
+@Html.Partial("_MyFacebookLogin", "Shared")
+@Html.Partial("_EzydHelpers", "Shared")
+
+
+<script type="text/javascript">
+
+
+    /*
+    * form that contains all transaction request input
+    * it allows adding and deleting users
+    * it works on different modes:
+    *   - "equal charge" - where every user uses same ammout of group expenses,
+    *   - "user ballance" - where guy, who creates transactions writes pre-calculated ballance for every user to the form
+    * if has display method, which display just the form with inputs, not mode changing drop-down-list, not adding new user menu (just method)
+    * 
+    * PRE:
+    *   its constructor needs object name for form to work propertly
+    */
+    function transactionForm(thisObjectName) {
+
+        this.thisObjectName = thisObjectName; //if there is no name - delete does not work
+        this.whereToDisplay;
+        this.guyName = new Array();
+        this.guyId = new Array();
+        this.input1 = new Array(); //default = paid/ballance
+        this.input2 = new Array(); //default = spent ?
+        this.input3 = new Array(); //default = desc
+        this.transactionName = "";
+        this.size = 0;
+        this.mode = "equal charge";
+
+        this.saveOldInputs = function(){ //display could take inputs directly from old table //TODO fix it (in far far future coz it works ;] )
+            for (var i = 0; i < this.size && i < document.getElementsByName("input1").length; i++) {
+                this.input1[i] = (document.getElementsByName("input1")[i]).value;
+            }
+            for (var i = 0; i < this.size && i < document.getElementsByName("input2").length; i++) {
+                this.input2[i] = (document.getElementsByName("input2")[i]).value;
+            }
+            for (var i = 0; i < this.size && i < document.getElementsByName("input3").length; i++) {
+                this.input3[i] = (document.getElementsByName("input3")[i]).value;
+            }
+            this.transactionName = document.getElementById("transactionName").value;
+        }
+
+        this.addGuy = function (guyName, guyId) {
+            if (this.size >= 10) {
+                alertUser("there cant be more than 10 users")
+            }
+            else {
+                this.saveOldInputs();
+
+                this.guyName[this.size] = guyName;
+                this.guyId[this.size] = guyId;
+
+                this.input1[this.size] = "";
+                this.input2[this.size] = "";
+                this.input3[this.size] = "";
+
+                this.size++;
+                if (this.whereToDisplay != null || this.whereToDisplay != "") {
+                    this.display(this.whereToDisplay);
+                }
+                else {
+                    alertUser("whereToDisplay is empty in: " + this.listName);
+                }
+            }
+        }
+
+        this.deleteGuy = function (no) {
+            this.saveOldInputs();
+
+            if (no < this.size && no >= 0) {
+                for (; no < this.size - 1; no++) {
+                    this.guyName[no] = this.guyName[no + 1];
+                    this.guyId[no] = this.guyId[no + 1];
+                    this.input1[no] = this.input1[no + 1];
+                    this.input2[no] = this.input2[no + 1];
+                    this.input3[no] = this.input3[no + 1];
+                }
+                this.guyName[this.size-1] = '@this.LclRes("undefined")';
+                this.guyId[this.size-1] = '@this.LclRes("undefined")';
+                this.input1[this.size-1] = 0;
+                this.input2[this.size-1] = 0;
+                this.input3[this.size-1] = " ";
+                this.size--;
+                if (this.whereToDisplay != null || this.whereToDisplay != "") {
+                    this.display(this.whereToDisplay);
+                }
+                else {
+                    alertUser("whereToDisplay is empty in: " + this.listName);
+                }
+            }
+        }
+
+        this.changeDisplayMode = function (newMode) {
+            this.saveOldInputs(); //to leave inputs filled
+            this.mode = newMode;
+            this.display(this.whereToDisplay);
+        }
+
+        this.display = function (divID) {
+            this.whereToDisplay = divID;
+            var table = "";
+
+            table += "<br />"
+            table += "<input type='button' onclick='" + this.thisObjectName + ".sendForm()' value='@this.LclRes("send form")'>";
+            table += "<br />";
+            table += "@this.LclRes("Transaction Name") <input type='text' id='transactionName' value='" + this.transactionName + "'/>";
+            table += "<br />";
+            table += '@this.LclRes("Currency")';
+            table += "<select id='currency'>"; //TODO it looks baaaad (but its JS - its acceptable ;] ) //TODO FIX IT!!!
+            if (document.getElementById("currency") == null) {
+                table += "<option selected='selected'> PLN </option>"; //default value is still "PLN" ;]
+                table += "<option> EUR </option>";
+                table += "<option> USD </option>";
+                table += "<option> GBP </option>";
+                table += "<option> CHF </option>";
+            }
+            else {
+                if (document.getElementById("currency").value == "PLN") { //if, else makes currency not chaning during re-displayng table
+                    table += "<option selected='selected'> PLN </option>";
+                }
+                else {
+                    table += "<option> PLN </option>";
+                }
+
+                if (document.getElementById("currency").value == "EUR") {
+                    table += "<option selected='selected'> EUR </option>";
+                }
+                else {
+                    table += "<option> EUR </option>";
+                }
+
+                if (document.getElementById("currency").value == "USD") {
+                    table += "<option selected='selected'> USD </option>";
+                }
+                else {
+                    table += "<option> USD </option>";
+                }
+
+                if (document.getElementById("currency").value == "GBP") {
+                    table += "<option selected='selected'> GBP </option>";
+                }
+                else {
+                    table += "<option> GBP </option>";
+                }
+
+                if (document.getElementById("currency").value == "CHF") {
+                    table += "<option selected='selected'> CHF </option>";
+                }
+                else {
+                    table += "<option> CHF </option>";
+                }
+            }
+            table += "</select>";
+            table += "<br />"
+
+            //TODO make inputs name same in every type of transaction
+            if (this.mode == "user ballance") {
+                table += "<table border='1'> ";
+                table += "<tr> <td> @this.LclRes("Name") </td> <td> @this.LclRes("Photo") </td> <td> @this.LclRes("Value") </td> <td> @this.LclRes("Description") </td> <td> @this.LclRes("Delete") </td> </tr> "; //top of the table
+                for (var i = 0; i < this.size; i++) {
+                    table += "<tr>";
+                    table += "<td>" + this.guyName[i] + "</td>";
+                    table += "<td>" + "<img src='http://graph.facebook.com/" + this.guyId[i] + "/picture' />" + "</td>";
+                    table += "<td>" + "<input type='text' name='input1' value='" + this.input1[i] + "'/>" + "</td>";
+                    table += "<td>" + "<input type='text' name='input3' value='" + this.input3[i] + "'/>" + "</td>";
+                    table += "<td>" + "<input type='button' onclick='" + this.thisObjectName + ".deleteGuy(" + i + ")' value='@this.LclRes("delete")' />" + "</td>";
+                    table += "</tr> ";
+                }
+            }
+
+            else if (this.mode == "equal charge") {
+                table += "<table border='1'> ";
+                table += "<tr> <td> @this.LclRes("Name") </td> <td> @this.LclRes("Photo") </td> <td> @this.LclRes("Payment") </td> <td> @this.LclRes("Description") </td> <td> @this.LclRes("Delete") </td> </tr> "; //top of the table
+                for (var i = 0; i < this.size; i++) {
+                    table += "<tr>";
+                    table += "<td>" + this.guyName[i] + "</td>";
+                    table += "<td>" + "<img src='http://graph.facebook.com/" + this.guyId[i] + "/picture' />" + "</td>";
+                    table += "<td>" + "<input type='text' name='input1' value='" + this.input1[i] + "'/>" + "</td>";
+                    table += "<td>" + "<input type='text' name='input3' value='" + this.input3[i] + "'/>" + "</td>";
+                    table += "<td>" + "<input type='button' onclick='" + this.thisObjectName + ".deleteGuy(" + i + ")' value='@this.LclRes("delete")' />" + "</td>"; //cos tutaj nie dziala kasowanie
+                    table += "</tr> ";
+                }
+            }
+
+            else if (this.mode == "paid - spent") {
+                table += "<table border='1'> ";
+                table += "<tr> <td> @this.LclRes("Name") </td> <td> @this.LclRes("Photo") </td> <td> @this.LclRes("Payed") </td> <td> @this.LclRes("Spent") </td> <td> @this.LclRes("Description") </td> <td> @this.LclRes("Delete") </td> </tr> "; //top of the table
+                for (var i = 0; i < this.size; i++) {
+                    table += "<tr>";
+                    table += "<td>" + this.guyName[i] + "</td>";
+                    table += "<td>" + "<img src='http://graph.facebook.com/" + this.guyId[i] + "/picture' />" + "</td>";
+                    table += "<td>" + "<input type='text' name='input1' value='" + this.input1[i] + "'/>" + "</td>";
+                    table += "<td>" + "<input type='text' name='input2' value='" + this.input2[i] + "'/>" + "</td>";
+                    table += "<td>" + "<input type='text' name='input3' value='" + this.input3[i] + "'/>" + "</td>";
+                    table += "<td>" + "<input type='button' onclick='" + this.thisObjectName + ".deleteGuy(" + i + ")' value='@this.LclRes("delete")' />" + "</td>";
+                    table += "</tr> ";
+                }
+            }
+
+            else if (this.mode == "money transfer") {
+                table += "<table border='1'> ";
+
+                table += "<tr>";//top of the table
+                table += "<td> @this.LclRes("Payer") </td> <td> </td> <td> </td> <td> @this.LclRes("Receiver") </td> <td> </td> <td> @this.LclRes("Ammount payed") </td> <td> @this.LclRes("Description") </td>";
+                table += "</tr> "; 
+
+                //main UI
+                table += "<tr>";
+                table += "<td>" + this.guyName[0] + "</td>"; //guy0 name
+                table += "<td> <img src='http://graph.facebook.com/" + this.guyId[0] + "/picture' /></td>"; //guy0 photo
+                table += "<td> <input type='button' onclick='" + this.thisObjectName + ".swapButtonClicked()' value='@this.LclRes("swap")' /> </td>"; //swap btn
+                table += "<td>" + this.guyName[1] + "</td>"; //guy1 name
+                table += "<td> <img src='http://graph.facebook.com/" + this.guyId[1] + "/picture' /></td>"; //guy1 name
+                table += "<td>" + "<input type='text' name='input1' value='" + this.input1[0] + "'/>" + "</td>"; //value payed
+                table += "<td>" + "<input type='text' name='input3' value='" + this.input3[0] + "'/>" + "</td>"; //desc
+                table += "</tr>"
+
+                //delete buttons
+                table += "<tr>";
+                table += "<td>" + "<input type='button' onclick='" + this.thisObjectName + ".deleteGuy(0)' value='@this.LclRes("delete")' />" + "</td>";
+                table += "<td/> <td/> <td/>";
+                table += "<td>" + "<input type='button' onclick='" + this.thisObjectName + ".deleteGuy(1)' value='@this.LclRes("delete")' />" + "</td>";
+                table += "<td/> <td/>"
+                table += "</tr>";
+
+
+            }
+
+            else {
+                alertUser(this.LclRes("unknown transaction mode"));
+            }
+
+            table += "</table>"; //not sure if this is needed
+
+            document.getElementById(this.whereToDisplay).innerHTML = table;
+        }
+
+        this.swapButtonClicked = function() {
+            this.saveOldInputs();
+
+            //swap 0 and 1 guys ID and Name
+            var tempID = this.guyId[0];
+            var tempName = this.guyName[0];
+            this.guyId[0] = this.guyId[1];
+            this.guyName[0] = this.guyName[1];
+            this.guyId[1] = tempID;
+            this.guyName[1] = tempName;
+
+
+            if (this.whereToDisplay != null || this.whereToDisplay != "") {
+                this.display(this.whereToDisplay);
+            }
+            else {
+                alertUser("whereToDisplay is empty in: " + this.listName);
+            }
+        }
+
+        /* 
+        * //TODO it should work but make it looking better
+        * needed for "equal charge" mode
+        * removes other guys from table and sum their expenses
+        * removing is changing guyID to -666 //IMPORTANT
+        */
+        this.removeOthers = function (neededGuyID, beginFrom) {
+            var guySum = 0;
+            for (var i = beginFrom + 1; i < this.size; i++) {
+                if (this.guyId[i] == neededGuyID) {
+                    guySum += (document.getElementsByName("input1")[i]).value;
+                    this.deleteGuy(i);
+                }
+            }
+            return guySum;
+        }
+
+        this.getValuesArr = function () {
+            var valuesArr = Array();
+
+            //checking is values are actualy numbers
+            for (var i = 0; i < this.size && i < document.getElementsByName("input1").length; i++) {
+                var temp = (document.getElementsByName("input1")[i]).value;
+                temp = temp.replace(",", ".");
+                if (IsNumeric(temp.toString()) == false && temp.toString() != "") {
+                    alertUser("ERROR - '" + (document.getElementsByName("input1")[i]).value + "' is not correct value");
+                    valuesArr[0] = -666.666; //so transaction wont be posted
+                    return valuesArr;
+                }
+            }
+            //checking input 2 to be values
+            if (this.mode == "paid - spent") { //it can exist only in this mode
+                for (var i = 0; i < this.size && i < document.getElementsByName("input2").length; i++) {
+                    var temp = (document.getElementsByName("input2")[i]).value;
+                    temp = temp.replace(",", ".");
+                    if (IsNumeric(temp.toString()) == false && temp.toString() != "") {
+                        alertUser("ERROR - '" + (document.getElementsByName("input2")[i]).value + "' is not correct value");
+                        valuesArr[0] = -666.666; //so transaction wont be posted
+                        return valuesArr;
+                    }
+                }
+            }
+
+            if (this.mode == "user ballance") {
+                //same person cant exist in 1 "user ballance" transaction more than 1 time
+                var repeatingSameGuy = false;
+                for (var i = 0; i < this.size; i++) {
+                    for (var j = i + 1; j < this.size; j++) {
+                        if (this.guyId[i] == this.guyId[j]) {
+                            repeatingSameGuy = true;
+                        }
+                    }
+                }
+
+                if (repeatingSameGuy == true) {
+                    alertUser("same person exists more than 1 in 'user ballance' transaction");
+                    valuesArr[0] = -666.666; //so transaction won't be sent
+                }
+                else {
+                    for (var i = 0; i < this.size; i++) {
+                        valuesArr.push(valueConverter((document.getElementsByName("input1")[i]).value));
+                    }
+                }
+            }
+
+            else if (this.mode == "equal charge") {
+                var sum = 0;
+                var guysNo = 0;
+
+
+                //aggregate same users
+                for (var i = 0; i < this.size; i++) {
+                    var preValue = valueConverter((document.getElementsByName("input1")[i]).value);
+                    var otherPlacesSumValue = valueConverter(this.removeOthers(this.guyId[i], i));
+                    var totalValue = valueDeconverter(((+preValue) + (+otherPlacesSumValue)).toString());
+                    (document.getElementsByName("input1")[i]).value = totalValue;
+                }
+
+                for (var i = 0; i < this.size; i++) {
+                    if (this.guyId[i] != -666) {
+                        sum += (+valueConverter((document.getElementsByName("input1")[i]).value));
+                        valuesArr.push(valueConverter((document.getElementsByName("input1")[i]).value));
+                        guysNo++;
+                    }
+                }
+                var everyonesExpense = sum / guysNo; //its value that everyone has spent
+                for (var i = 0; i < valuesArr.length; i++) {
+                    valuesArr[i] -= everyonesExpense;
+                }
+            }
+
+            else if (this.mode == "paid - spent") {
+                //same person cant exist in 1 "paid - spent" transaction more than 1 time
+                var repeatingSameGuy = false;
+                for (var i = 0; i < this.size; i++) {
+                    for (var j = i + 1; j < this.size; j++) {
+                        if (this.guyId[i] == this.guyId[j]) {
+                            repeatingSameGuy = true;
+                        }
+                    }
+                }
+
+                if (repeatingSameGuy == true) {
+                    alertUser('@this.LclRes("same person exists more")');
+                    valuesArr[0] = -666.666; //so transaction won't be sent
+                    return valuesArr;
+                }
+                else {
+                    var paidSum = 0;
+                    var spentSum = 0;
+                    for (var i = 0; i < this.size; i++) {
+                        paidSum += (+valueConverter((document.getElementsByName("input1")[i]).value));
+                        spentSum += (+valueConverter((document.getElementsByName("input2")[i]).value));
+                    }
+                    if (paidSum != spentSum) {
+                        alertUser('@this.LclRes("ERROR - paid sum")');
+                        valuesArr[0] = -666.666; //so form wont be sent
+                        return valuesArr;
+                    }
+                    else { //sums are equal - so everything is fine
+                        for (var i = 0; i < this.size; i++) {
+                            valuesArr[i] = (+valueConverter((document.getElementsByName("input1")[i]).value)) - (+valueConverter((document.getElementsByName("input2")[i]).value));
+                        }
+                    }
+                }
+            }
+            else if(this.mode == "money transfer"){
+                valuesArr[0] = (+valueConverter((document.getElementsByName("input1")[0]).value));
+                valuesArr[1] = -1 * valuesArr[0];
+                this.size = 2; //to dont add any more users to transaction;
+            }
+
+            else {
+                alertUser('@this.LclRes("ERROR - 000003")');
+            }
+
+            //checking ballance of the transaction (it should be ok in here - if its not - its kind of big err)
+            var endSum = 0;
+            for (var i = 0; i < valuesArr.length; i++) {
+                endSum += (+valuesArr);
+            }
+            if (Math.abs(endSum) > 0.1) {
+                alertUser('@this.LclRes("ERROR - 000004")');
+                valuesArr[0] = -666.666
+                return valuesArr;
+            }
+
+            //deleting komma and values after komma (it can show after dividing)
+            for (var i = 0; i < valuesArr.length; i++) {
+                var temp = valuesArr[i].toString().indexOf(".");
+                if (temp != -1) {
+                    valuesArr[i] = valuesArr[i].toString().substring(0, temp);
+                }
+            }
+
+            //counting endsum again and adding the difference to user[0] //tricky o.O ;]
+            endSum = 0;
+            for (var i = 0; i < valuesArr.length; i++) {
+                endSum += (+valuesArr[i]);
+            }
+            if (Math.abs(endSum) > 3) {//0.03zl = not so much - it should
+                alertUser('@this.LclRes("ERROR - 000005")');
+                valuesArr[0] = -666.666
+                return valuesArr;
+            }
+            else {
+                valuesArr[0] -= (+endSum);
+            }
+
+            return valuesArr;
+        }
+
+        this.isRepeatingSameGuy = function() //TODO: add usage of it everywhere
+        {
+            var repeatingSameGuy = false;
+            for (var i = 0; i < this.size; i++) {
+                for (var j = i + 1; j < this.size; j++) {
+                    if (this.guyId[i] == this.guyId[j]) {
+                        repeatingSameGuy = true;
+                    }
+                }
+            }
+
+            return repeatingSameGuy;
+        }
+
+        this.getGuyIDs = function () {
+            var guyIDs = Array();
+            for (var i = 0; i < this.size; i++) {
+
+                if(this.guyId[i] != -666){
+                    guyIDs.push(this.guyId[i]);
+                }
+            }
+            return guyIDs;
+        }
+
+        this.getDescriptionsArr = function () {
+            var descriptionsArr = Array();
+
+            if(this.mode == "money transfer"){ //there is only 1 description and we need two of them
+                descriptionsArr[0] = (document.getElementsByName("input3")[0]).value;
+                descriptionsArr[1] = "@this.LclRes("money transfer")";
+            }
+            else
+            {
+                for (var i = 0; i < this.size; i++) {
+                    if(this.guyId[i] != -666){
+                        var temp = (document.getElementsByName("input3")[i]).value; //TODO it is fragile to desc which contains only white signs
+                        if (temp == "" || temp == null) {
+                            temp = " ";
+                        }
+                        descriptionsArr.push(temp);
+                    }
+                }
+            }
+            return descriptionsArr;
+
+        }
+
+        this.sendForm = function () {
+            if (confirm('@Html.Raw(this.LclRes("Are you sure, that you want to add"))')) {
+                //TODO make it looking better
+                var ok = true;
+
+                //order is important
+                var valuesArr = this.getValuesArr();
+                var idsArr = this.getGuyIDs();
+                var descArr = this.getDescriptionsArr();
+
+                for (var i = 0; i < this.size; i++) { //arrays should have equal length 
+                    if (idsArr[i] == -666.666 || descArr[i] == -666.666 || valuesArr[i] == -666.666) {
+                        ok = false;
+                    }
+                }
+
+                if (ok == true) {
+                    $.ajax(
+                    {
+                        type: "POST",
+                        traditional: true,
+                        url: "/Transaction/addTransaction",
+                        data: { values: valuesArr, ids: idsArr, descs: descArr, currency: document.getElementById("currency").value, transactionName: document.getElementById("transactionName").value },
+                        success: function (result) {
+                            if (result["accepted"] == '1') {
+                                alertUser('@this.LclRes("transaction has been added")');
+                                location.reload("true");
+                            }
+                            else {
+                                alertUser(result["error"]);
+                            }
+                        },
+                        error: function (req, status, error) {
+                            alertUser('@this.LclRes("Sorry! We could not receive your feedback")');
+                        }
+                    });
+                }
+            }
+        }
+    } 
+</script>
+
+<div id="dropDownModeList">
+    <select id="formMode" onchange="TransactionForm.changeDisplayMode(this.value)">
+        <option selected="selected" value="equal charge">@this.LclRes("equal charge")</option>
+        <option value="user ballance">@this.LclRes("user ballance")</option>
+        <option value="paid - spent">@this.LclRes("paid - spent")</option>
+        <option value="money transfer">@this.LclRes("money transfer")</option>
+    </select>
+</div>
+
+<div id="form">
+    <script type="text/javascript">
+        var TransactionForm = new transactionForm("TransactionForm");
+        TransactionForm.display("form");
+        TransactionForm.addGuy("@ViewData["UserName"]", "@ViewData["UserID"]");
+    </script>
+</div>
+
+
+<script type="text/javascript">
+    var FLdone = false;
+    var friendListNames = new Array();
+    var friendListIds = new Array();
+
+    function getFL() {
+        FB.api("/me/friends", { fields: 'id,name' }, function (response) {
+            for (var key in response.data) {
+                friendListIds.push(response.data[key].id);
+                friendListNames.push(response.data[key].name);
+            }
+        });
+        FLdone = true;
+    }
+
+    function findFriends2(name) {
+        if (!FLdone) {
+            getFL();
+        }
+        var friends2 = "";
+        if (name == "") {
+            table = ""
+        }
+        else {
+            var pattern = new RegExp(name, 'i'); //if string contains the name (letter cases are not important)
+            var friends2 = "<table>";
+            for (var i = 0; i < friendListNames.length; i++) {
+                if (pattern.test(friendListNames[i])) {
+                    friends2 += "<tr>";
+                    friends2 += "<td>" + friendListNames[i] + "</td><td> " + "<img src='http://graph.facebook.com/" + friendListIds[i] + "/picture' /></td>";
+                    buttonOnClick = "TransactionForm.addGuy('" + friendListNames[i] + "','" + friendListIds[i] + "')"; //nie wygląda to za ładnie ale działa ;)
+                    buttonOnClick = 'onclick="' + buttonOnClick + '"';
+                    friends2 += "<td> <input type='button' " + buttonOnClick + " value='@this.LclRes("add")' /> </td>";
+                    friends2 += "</tr>";
+                }
+            }
+            friends2 += "</table>";
+        }
+
+        document.getElementById("findFriends2").innerHTML = friends2;
+    }
+</script>
+<div id="friendlistSearchEngine">
+    <h5>@this.LclRes("Friendlist search engine")</h5>
+    <input type="text" value="@this.LclRes("firstname lastname")" id="friendName2" onkeyup="findFriends2(this.value)" />
+    <input type="button" value="@this.LclRes("search")" onclick="findFriends2(document.getElementById('friendName2').value)" />
+</div>
+<div id="findFriends2"></div>
+
+
+
+<div id="friendNameInput">
+    <br />
+    <h5>@this.LclRes("Facebook friends search engine")</h5>
+    <input type="text" value="@this.LclRes("firstname lastname")" id="friendName" /> @* onkeypress="findFriends(this.value)" /> to też było wkurwiające *@
+    <input type="button" value="@this.LclRes("search")" onclick="findFriends(document.getElementById('friendName').value)" />
+    <br />
+    <br />
+</div>
+<div id="findFriends">
+</div>
+<script type="text/javascript">
+    function findFriends(name) {
+        var params = {};
+        params["q"] = name;
+        params["type"] = "user";
+        FB.api("/search", params, function (response) {
+            var friends = "<table>";
+            for (key in response.data) {
+                friends += "<tr>";
+                var hyperLink = "'http://facebook.com/" + response.data[key].id + "'";
+                friends += "<td><a href=" + hyperLink + ">" + response.data[key].name + "</a></td>";
+                friends += "<td><img src='http://graph.facebook.com/" + response.data[key].id + "/picture' /></td>";
+                buttonOnClick = "TransactionForm.addGuy('" + response.data[key].name.toString() + "','" + response.data[key].id.toString() + "')"; //nie wygląda to za ładnie ale działa ;)
+                buttonOnClick = 'onclick="' + buttonOnClick + '"';
+                friends += "<td> <input type='button' " + buttonOnClick + " value='@this.LclRes("add")' /> </td>";
+                friends += "</tr>";
+            }
+            friends += "</table>";
+
+            document.getElementById("findFriends").innerHTML = friends;
+        });
+    }
+    
+</script>
+
+
+<fb:login-button autologoutlink="true"></fb:login-button>

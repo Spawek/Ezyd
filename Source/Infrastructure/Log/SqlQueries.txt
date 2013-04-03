@@ -1,0 +1,205 @@
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641''123312321' )AND `receiverID` IN ( '100000907961641''123312321' )AND `receiverAccepted` = 1 
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641''123312321' )AND `receiverID` IN ( '100000907961641''123312321' )AND `receiverAccepted` = 1 
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641''123312321' )AND `receiverID` IN ( '100000907961641''123312321' )AND `receiverAccepted` = 1 
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641''123312321' )AND `minusGuyID` IN ( '100000907961641''123312321' )
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641''123312321' )AND `minusGuyID` IN ( '100000907961641''123312321' )
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254609, 100000907961641, 123312321, 150, 'EUR', NOW(),  ), (746254601, 100000907961641, 123312321, 16400, 'PLN', NOW(), ' ' )
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254609, 100000907961641, 123312321, 150, 'EUR', NOW(), '' ), (746254601, 100000907961641, 123312321, 16400, 'PLN', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601AND `minusGuyId` = 100000907961641AND `plusGuyID` = 123312321
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254609, 100000907961641, 123312321, 150, 'EUR', NOW(), '' ), (746254601, 123312321, 100000907961641, 16400, 'PLN', NOW(), '' ), (746254601, 100000907961641, 123312321, 16400, 'PLN', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254598 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254609 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254609, 100000907961641, 123312321, 150, 'EUR', NOW(), '' ), (746254601, 123312321, 100000907961641, 16400, 'PLN', NOW(), '' ), (746254601, 100000907961641, 123312321, 16400, 'PLN', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254598 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254609 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254609, 100000907961641, 123312321, 150, 'EUR', NOW(), '' ), (746254601, 123312321, 100000907961641, 16400, 'PLN', NOW(), '' ), (746254601, 100000907961641, 123312321, 16400, 'PLN', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254598 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254609 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254609, 100000907961641, 123312321, 150, 'EUR', NOW(), '' ), (746254601, 123312321, 100000907961641, 16400, 'PLN', NOW(), '' ), (746254601, 123312321, 100000907961641, 16400, 'PLN', NOW(), '' ), (746254601, 100000907961641, 123312321, 16400, 'PLN', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254598 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254609 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254609, 100000907961641, 123312321, 150, 'EUR', NOW(), '' ), (746254601, 123312321, 100000907961641, 16400, 'PLN', NOW(), '' ), (746254601, 123312321, 100000907961641, 16400, 'PLN', NOW(), '' ), (746254601, 100000907961641, 123312321, 16400, 'PLN', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254598 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254609 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254609, 100000907961641, 123312321, 150, 'EUR', NOW(), '' ), (746254601, 123312321, 100000907961641, 16400, 'PLN', NOW(), '' ), (746254601, 123312321, 100000907961641, 16400, 'PLN', NOW(), '' ), (746254601, 123312321, 100000907961641, 16400, 'PLN', NOW(), '' ), (746254601, 100000907961641, 123312321, 16400, 'PLN', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254598 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254609 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254601, 123312321, 100000907961641, 98350, 'PLN', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254598 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254603 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254609 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254601, 123312321, 100000907961641, 98350, 'PLN', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254598 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254603 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254609 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254601, 123312321, 100000907961641, 98350, 'PLN', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254598 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254603 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254609 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254601, 123312321, 100000907961641, 98350, 'PLN', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254598 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254603 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254609 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254601, 123312321, 100000907961641, 98350, 'PLN', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254598 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254603 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254609 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254601, 123312321, 100000907961641, 98350, 'PLN', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254598 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254603 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254609 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254601 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+SELECT MAX(`maxID`) as `overallMaxID` FROM ( SELECT MAX(`transactionID`) as `maxID` FROM `transactions_reqs` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_pending` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_history` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_cancelled` ) as `A` 
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254614, 100000907961641, 123312321, 16550, 'EUR', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254598 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254603 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254609 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+SELECT `senderID`, `receiverID` FROM `friends` WHERE `senderID` IN ( '100000907961641','123312321' )AND `receiverID` IN ( '100000907961641','123312321' )AND `receiverAccepted` = 1 
+SELECT * FROM `transactions_pending` WHERE `plusGuyID` IN ( '100000907961641','123312321' )AND `minusGuyID` IN ( '100000907961641','123312321' )
+SELECT MAX(`maxID`) as `overallMaxID` FROM ( SELECT MAX(`transactionID`) as `maxID` FROM `transactions_reqs` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_pending` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_history` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_cancelled` ) as `A` 
+INSERT INTO `transactions_pending` (`transactionID`, `plusGuyID`, `minusGuyID`, `value`, `currency`, `date`, `desc`) VALUES(746254617, 100000907961641, 123312321, 0, 'PLN', NOW(), ' ' )
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254598 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254603 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254609 AND `minusGuyId` = 100000907961641 AND `plusGuyID` = 123312321
+DELETE FROM `transactions_pending` WHERE `transactionID` = 746254614 AND `minusGuyId` = 123312321 AND `plusGuyID` = 100000907961641
+SELECT MAX(`maxID`) as `overallMaxID` FROM ( SELECT MAX(`transactionID`) as `maxID` FROM `transactions_reqs` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_pending` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_history` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_cancelled` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_accepted_history` ) as `A` 
+SELECT MAX(`maxID`) as `overallMaxID` FROM ( SELECT MAX(`transactionID`) as `maxID` FROM `transactions_reqs` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_pending` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_history` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_cancelled` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_accepted_history` ) as `A` 
+SELECT MAX(`maxID`) as `overallMaxID` FROM ( SELECT MAX(`transactionID`) as `maxID` FROM `transactions_reqs` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_pending` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_history` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_cancelled` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_accepted_history` ) as `A` 
+SELECT MAX(`maxID`) as `overallMaxID` FROM ( SELECT MAX(`transactionID`) as `maxID` FROM `transactions_reqs` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_pending` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_history` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_cancelled` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_accepted_history` ) as `A` 
+SELECT MAX(`maxID`) as `overallMaxID` FROM ( SELECT MAX(`transactionID`) as `maxID` FROM `transactions_reqs` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_pending` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_history` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_cancelled` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_accepted_history` ) as `A` 
+SELECT MAX(`maxID`) as `overallMaxID` FROM ( SELECT MAX(`transactionID`) as `maxID` FROM `transactions_reqs` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_pending` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_history` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_cancelled` UNION SELECT MAX(`transactionID`) as `maxID` FROM `transactions_accepted_history` ) as `A` 
+SELECT `transactionID` FROM `transactions_reqs` WHERE `transactionID` = 2
+SELECT `transactionID` FROM `transactions_pending` WHERE `transactionID` = 2
+SELECT `transactionID` FROM `transactions_history` WHERE `transactionID` = 2
+SELECT `transactionID` FROM `transactions_cancelled` WHERE `transactionID` = 2
+INSERT INTO `transactions_reqs` (`transactionID`, `userID`, `value`, `currency`, `date`, `accepted`, `desc`) VALUES (2, 100000907961641, 750, 'PLN', NOW(), 0, ' '), (2, 123312321, -750, 'PLN', NOW(), 0, ' '), (2, 0, 0, 'PLN', NOW(), 1, '')
+INSERT INTO exceptions (`message`, `date`) VALUES ('Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: Element „string” nie zawiera definicji „dupa”.
+   w CallSite.Target(Closure , CallSite , Object )
+   w System.Dynamic.UpdateDelegates.UpdateAndExecuteVoid1[T0](CallSite site, T0 arg0)
+   w ezyd.Controllers.HomeController.Index() w D:\maciek\programowanie\facebook\ezyd\Controllers\HomeController.cs:wiersz 157
+   w lambda_method(Closure , ControllerBase , Object[] )
+   w System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   w System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)', '26/06/2012 11:51:05')
+INSERT INTO exceptions (`message`, `data`, `stackTrace`, `date`) VALUES ('Element „string” nie zawiera definicji „dupa”.',`System.Collections.ListDictionaryInternal`, `   w CallSite.Target(Closure , CallSite , Object )
+   w System.Dynamic.UpdateDelegates.UpdateAndExecuteVoid1[T0](CallSite site, T0 arg0)
+   w ezyd.Controllers.HomeController.Index() w D:\maciek\programowanie\facebook\ezyd\Controllers\HomeController.cs:wiersz 157
+   w lambda_method(Closure , ControllerBase , Object[] )
+   w System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   w System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)`, 26/06/2012 11:57:57)
+INSERT INTO exceptions (`message`, `data`, `stackTrace`, `date`) VALUES ('Element „string” nie zawiera definicji „dupa”.',`System.Collections.ListDictionaryInternal`, `   w CallSite.Target(Closure , CallSite , Object )
+   w ezyd.Controllers.HomeController.Index() w D:\maciek\programowanie\facebook\ezyd\Controllers\HomeController.cs:wiersz 157
+   w lambda_method(Closure , ControllerBase , Object[] )
+   w System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   w System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   w System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass15.<InvokeActionMethodWithFilters>b__12()
+   w System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation)`, 26/06/2012 11:58:03)

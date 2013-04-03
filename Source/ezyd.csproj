@@ -1,0 +1,478 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FFC25BB5-D8C1-4BFD-86FC-6B779B792673}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ezyd</RootNamespace>
+    <AssemblyName>ezyd</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PublishDatabases>true</PublishDatabases>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Facebook">
+      <HintPath>..\facebookDeveloperToolkit\net40-client\Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook.Web">
+      <HintPath>..\facebookDeveloperToolkit\net40\Facebook.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook.Web.Mvc">
+      <HintPath>..\facebookDeveloperToolkit\net40\Facebook.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.4.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.4.3\Assemblies\v4.0\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity, Version=6.4.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.4.3\Assemblies\v4.0\MySql.Data.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="MySQL.VisualStudio">
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.4.3\Visual Studio Integration\2010\MySQL.VisualStudio.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Web, Version=6.4.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\MySQL\MySQL Connector Net 6.4.3\Assemblies\v4.0\MySql.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\library\newtonsoft.Json\Bin\Net35\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages" />
+    <Reference Include="System.Web.Helpers" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FriendsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
+    <Compile Include="Controllers\TutorialController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\LogAttribute.cs" />
+    <Compile Include="Models\ezyd\DataBase.cs" />
+    <Compile Include="Models\ezyd\EzydDB.cs" />
+    <Compile Include="Models\ezyd\EzydInstantDB.cs" />
+    <Compile Include="Models\ezyd\FBappDB.cs" />
+    <Compile Include="Models\ezyd\MainClass.cs" />
+    <Compile Include="Models\ezyd\tableRecordStructures.cs" />
+    <Compile Include="Models\ezyd\TransactionIdProvider.cs" />
+    <Compile Include="Models\helpers\AjaxActionOnly.cs" />
+    <Compile Include="Models\stringHelper\BadCharsRemover.cs" />
+    <Compile Include="Models\TransactionModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Extentions.cs" />
+    <Compile Include="Views\Home\App_LocalResources\Test.cshtml.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Test.cshtml.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Images\ezyd2.jpg" />
+    <Content Include="Images\tutorial\accAndExeTransactionTutorial1.jpg" />
+    <Content Include="Images\tutorial\accAndExeTransactionTutorial2.jpg" />
+    <Content Include="Images\tutorial\accAndExeTransactionTutorial3.jpg" />
+    <Content Include="Images\tutorial\accAndExeTransactionTutorial4.jpg" />
+    <Content Include="Images\tutorial\accAndExeTransactionTutorial5.jpg" />
+    <Content Include="Images\tutorial\createNewTransactionTutorial1.jpg" />
+    <Content Include="Images\tutorial\createNewTransactionTutorial2.jpg" />
+    <Content Include="Images\tutorial\createNewTransactionTutorial3.jpg" />
+    <Content Include="Images\tutorial\createNewTransactionTutorial4.jpg" />
+    <Content Include="Images\tutorial\createNewTransactionTutorial5.jpg" />
+    <Content Include="Images\tutorial\friendsTutorial1.jpg" />
+    <Content Include="Images\tutorial\friendsTutorial2.jpg" />
+    <Content Include="Images\tutorial\friendsTutorial3.jpg" />
+    <Content Include="Images\tutorial\friendsTutorial4.jpg" />
+    <Content Include="Images\tutorial\HowItWorksCartoon1.jpg" />
+    <Content Include="Images\tutorial\HowItWorksCartoon2.jpg" />
+    <Content Include="Images\tutorial\HowItWorksCartoon3.jpg" />
+    <Content Include="Images\tutorial\HowItWorksCartoon4.jpg" />
+    <Content Include="Images\tutorial\HowItWorksCartoon5.jpg" />
+    <Content Include="Images\tutorial\whyUErrorToMeCartooon1.jpg" />
+    <Content Include="Images\tutorial\whyUErrorToMeCartooon2.jpg" />
+    <Content Include="Infrastructure\ChangeLog.txt" />
+    <Content Include="Infrastructure\Log\ControllerExceptions.txt" />
+    <Content Include="Infrastructure\Log\ControllerExceptions2.txt" />
+    <Content Include="Infrastructure\Log\ControllerExceptionsHandled.txt" />
+    <Content Include="Infrastructure\Log\ControllerExceptionsHandled2.txt" />
+    <Content Include="Infrastructure\Log\SqlBadQueries.txt" />
+    <Content Include="Infrastructure\Log\SqlQueries.txt" />
+    <Content Include="Scripts\all.js" />
+    <Content Include="Scripts\jquery-1.6.4.js" />
+    <Content Include="Scripts\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\jquery-1.4.4.js" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
+    <Content Include="Scripts\jquery-1.4.4-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LogOnPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="App_GlobalResources\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\GettingStarted.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\PrivacyPolicy.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\TermsOfService.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\uNotLogged.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\TableInput.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\JsTest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\JsFbTest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\TestOutput.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\JQueryTest.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\transactionCreator.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_MyFacebookLogin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\uNotLogged.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\transactionRequests.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\transactionCancelled.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\transactionPending.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Friends\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Friends\FriendListDisplay.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Friends\SendFriendInvitations.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Friends\AcceptFriendInvitations.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Friends\uNotLogged.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\paymentHistory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_uNotLogged.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_EzydHelpers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Test.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Error\Error404.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\acceptedTransactionsHistory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\friendlistTutorial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\createNewTransaction.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\accAndExeTransactionTutorial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\HowItWorksCartoon.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\whyUErrorToMeCartooon.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\transactionOptimizator.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\App_LocalResources\Test.cshtml.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Test.cshtml.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\App_LocalResources\Test.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="MvcGlobalisationSupport\MvcGlobalisationSupport.csproj">
+      <Project>{93D6A289-0315-46AE-856E-72549FB581EF}</Project>
+      <Name>MvcGlobalisationSupport</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\App_LocalResources\Index.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\App_LocalResources\Index.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\App_LocalResources\_Layout.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\App_LocalResources\_Layout.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\App_LocalResources\transactionCreator.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\App_LocalResources\transactionCreator.cshtml.pl-PL.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\App_LocalResources\_uNotLogged.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\App_LocalResources\_uNotLogged.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\App_LocalResources\transactionRequests.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\App_LocalResources\transactionRequests.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\App_LocalResources\transactionPending.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\App_LocalResources\transactionPending.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\App_LocalResources\accAndExeTransactionTutorial.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\App_LocalResources\accAndExeTransactionTutorial.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\App_LocalResources\createNewTransaction.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\App_LocalResources\friendlistTutorial.cshtml.pl-PL.resx" />
+    <Content Include="Views\Transaction\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Views\Transaction\App_LocalResources\Index.cshtml.pl-PL.resx" />
+    <Content Include="Views\Tutorial\App_LocalResources\Index.cshtml.pl-PL.resx" />
+    <Content Include="Views\Tutorial\App_LocalResources\friendlistTutorial.cshtml.resx" />
+    <Content Include="Views\Tutorial\App_LocalResources\Index.cshtml.resx" />
+    <Content Include="Views\Tutorial\App_LocalResources\createNewTransaction.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\App_LocalResources\transactionOptimizator.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\App_LocalResources\transactionOptimizator.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\App_LocalResources\acceptedTransactionsHistory.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\App_LocalResources\acceptedTransactionsHistory.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\App_LocalResources\paymentHistory.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\App_LocalResources\paymentHistory.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\App_LocalResources\transactionCancelled.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Transaction\App_LocalResources\transactionCancelled.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Friends\App_LocalResources\Index.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Friends\App_LocalResources\Index.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Friends\App_LocalResources\AcceptFriendInvitations.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Friends\App_LocalResources\AcceptFriendInvitations.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Friends\App_LocalResources\FriendListDisplay.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Friends\App_LocalResources\FriendListDisplay.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Friends\App_LocalResources\SendFriendInvitations.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Friends\App_LocalResources\SendFriendInvitations.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\suspendOptimization.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\App_LocalResources\suspendOptimization.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\App_LocalResources\suspendOptimization.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\App_LocalResources\HowItWorksCartoon.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\App_LocalResources\whyUErrorToMeCartooon.cshtml.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tutorial\App_LocalResources\whyUErrorToMeCartooon.cshtml.pl-PL.resx" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,159 @@
+﻿
+
+@* mssgs for user - shows alert and red text at the top of the website *@
+<div id="serverMsg"></div><br />
+<script type="text/javascript">
+    var alertUser = function (msg) {
+        var htmlMsg = "<h4><text style='color: #FF0000'>";
+        htmlMsg += msg;
+        htmlMsg += "</text></h4>";
+
+        document.getElementById("serverMsg").innerHTML = htmlMsg;
+
+        alert(msg);
+    }
+</script>
+
+<script type="text/javascript">
+
+    /*
+    * taken from stackoverflow
+    * it returns true when there are only white signs in input
+    */
+    function IsNumeric(input) {
+        return (input - 0) == input && input.length > 0;
+    }
+
+</script>
+
+<script type="text/javascript">
+    /*
+    * fucntion converting value from user-friendly to program(c#)-friendly (in c# every value is written as INT)
+    * how it works:
+    *   3 -> 300
+    *   3.02 -> 302
+    *   0.02 -> 2
+    *   0,02 -> 2
+    *   5.0,5 -> error
+    *   5,2 -> 520
+    *   5, -> 500
+    *   ,5 -> 50
+    */
+    function valueConverter(input) {
+        //counting kommas ("." and ",")
+        var dotsNo = 0;
+        for (var i = 0; i < input.length; i++) {
+            if (input.charAt(i) == "." || input.charAt(i) == ",") {
+                dotsNo++;
+            }
+        }
+        if (dotsNo > 1) { //ERROR - more than 1 komma
+            alertUser("ERROR - value: '" + input + "' contains more than 1 komma ('.' or ',')");
+            return -666.666;
+        }
+        else if (dotsNo == 0) { //no komma - it has to be multiplied by 100
+            return (+input) * 100;
+        }
+        else { //1 komma
+            var commaIndex = input.indexOf(".");
+            if (commaIndex == -1) {
+                commaIndex = input.indexOf(",");
+            }
+            if (commaIndex == -1) { //it should never happen
+                alertUser("comma index is equal -1 - ERROR 000001 - please contact administrators");
+                return -666.666;
+                //TODO throw exception to c# and log it
+            }
+            var output = 0;
+
+            var preKomma = input.substring(0, commaIndex);
+            if (IsNumeric(preKomma) == true) {
+                output += (+preKomma) * 100;
+            }
+            var isNoNegative = false;
+            if (output < 0) {
+                isNoNegative = true;
+            }
+
+            var postKomma = input.substring(commaIndex + 1, input.length);
+            if (IsNumeric(postKomma) == true) {
+                if (postKomma.length == 2) {
+                    if (isNoNegative) {
+                        output -= (+postKomma);
+                    }
+                    else {
+                        output += (+postKomma);
+                    }
+                }
+                else if (postKomma.length == 1) {
+                    if (isNoNegative) {
+                        output -= (+postKomma) * 10;
+                    }
+                    else {
+                        output += (+postKomma) * 10;
+                    }
+                }
+                else if (postKomma.length > 2) {
+                    alertUser("there are more than 2 numbers after komma in value: " + input);
+                    return -666.666;
+                }
+            }
+            return output;
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    function valueDeconverter(input) {
+        var output = "";
+        var unsignedInput;
+        if (input.charAt(0) == "-") {
+            output += "-";
+            unsignedInput = input.substring(1, input.length);
+        }
+        else {
+            unsignedInput = input;
+        }
+
+        if (unsignedInput.length == 0) {
+            output = "0";
+        }
+        else if (unsignedInput.length == 1) {
+            output += "0.0";
+            output += unsignedInput;
+        }
+        else if (unsignedInput.length == 2) {
+            output += "0.";
+            output += unsignedInput;
+        }
+        else if (unsignedInput.length > 2) { // (or < 0 - but its impossible (I hope so ;] ))
+            output += unsignedInput.substr(0, unsignedInput.length - 2);
+            output += ".";
+            output += unsignedInput.substr(unsignedInput.length - 2, unsignedInput.length);
+        }
+        else{
+            alertUser("ERROR - 000002 - contact administrator");
+            //TODO add post error msg to server
+        }
+
+        return output;
+    }
+</script>
+
+<script type="text/javascript">
+    userIdToName = function (ID) {
+        FB.api({
+            method: 'fql.query',
+            query: "SELECT name FROM user WHERE uid=" + ID
+        },
+        function (response) {
+            var temp = document.getElementsByName(ID)
+            for (var i = 0; i < temp.length; i++) {
+                temp[i].innerHTML = "<img src='http://graph.facebook.com/" + ID + "/picture' />"
+                if (response[0] != undefined) {
+                    temp[i].innerHTML += response[0].name; //need to change only last element
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,197 @@
+﻿@{
+    ViewBag.Title = "transactionRequestsDisplay";
+}
+
+<h2>@Html.ActionLink("transactions menu", "index")</h2>
+
+@Html.Partial("_MyFacebookLogin", "Shared")
+@Html.Partial("_EzydHelpers", "Shared")
+
+<script type="text/javascript">
+    userIdToName = function (ID) {
+        FB.api({
+            method: 'fql.query',
+            query: "SELECT name FROM user WHERE uid=" + ID
+        },
+        function (response) {
+            var temp = document.getElementsByName(ID)
+            for (var i = 0; i < temp.length; i++) {
+                temp[i].innerHTML = "<img src='http://graph.facebook.com/" + ID + "/picture' />"
+                if (response[0] != undefined) {
+                    temp[i].innerHTML += response[0].name; //need to change only last element
+                }
+            }
+        });
+    }
+
+    acceptTransaction = function (transactionID) {
+        if (confirm('@Html.Raw(this.LclRes("Are you sure, that you want to accept transaction with ID:"))' + transactionID)) {
+            $.ajax({
+                type: "POST",
+                traditional: true,
+                url: "/Transaction/acceptTranaction",
+                data: { TId: transactionID },
+                success: function (result) {
+                    if (result["ok"] == '1') {
+                        alert('@Html.Raw(this.LclRes("transaction has been accepted"))');
+                        location.reload("true");
+                    }
+                    else {
+                        alert("error: " + result["msg"]);
+                    }
+                },
+                error: function (req, status, error) {
+                    alert('@Html.Raw(this.LclRes("Sorry! We could not receive your feedback"))');
+                }
+            });
+        }
+    }
+
+    tryToMoveTransactionToPending = function (transactionID) {
+        $.ajax({
+            type: "POST",
+            traditional: true,
+            url: "/Transaction/moveToPending",
+            data: { TId: transactionID },
+            success: function (result) {
+                if (result["ok"] == '1') {
+                    alert('@Html.Raw(this.LclRes("transaction has been moved"))');
+                    location.reload("true");
+                }
+                else {
+                    alert("error: " + result["msg"]);
+                }
+            },
+            error: function (req, status, error) {
+                alert('@Html.Raw(this.LclRes("Sorry! We could not receive your feedback"))');
+            }
+        });
+    }
+
+    deleteTransaction = function (transactionID) {
+        if (confirm("@this.LclRes("Are you sure, that you want to cancel transaction")" + transactionID)) {
+            $.ajax({
+                type: "POST",
+                traditional: true,
+                url: "/Transaction/cancelTransaction",
+                data: { TId: transactionID },
+                success: function (result) {
+                    if (result["ok"] == '1') {
+                        alert("transaction has been cancelled");
+                        location.reload("true");
+                    }
+                    else {
+                        alert("error: " + result["msg"]);
+                    }
+                },
+                error: function (req, status, error) {
+                    alert('@Html.Raw(this.LclRes("Sorry! We could not receive your feedback"))');
+                }
+            });
+        }
+    }
+
+</script>
+
+@{
+    uint lastTransactionID = 0;
+    bool everyoneAccepted = true;
+    int i = 0;
+}
+
+<table align="center">
+    <tr>
+        <td>ID</td>
+        <td>@this.LclRes("user")</td>
+        <td>@this.LclRes("value")</td>
+        <td>@this.LclRes("currency")</td>
+        <td>@this.LclRes("date")</td>
+        <td>@this.LclRes("description")</td>
+        <td>@this.LclRes("acceptance")</td>
+    </tr>
+    @foreach (var item in (System.Collections.Generic.IEnumerable<ezyd.Models.TReqRec>)ViewData["TReqs"])
+    {
+        <tr style="border-style: none">
+        @{
+            if(lastTransactionID != item.transactionID && lastTransactionID != 0)
+            {      
+               <td style="border-style: none">
+                    <input type="button" onclick="deleteTransaction(@lastTransactionID)" value="@this.LclRes("delete transaction")" />
+                    <br /><br /><br /><br /><br />
+
+                    <div id ="transactionName @(item.transactionID)"></div>        
+                </td>
+            
+                if (lastTransactionID != 0 && everyoneAccepted == true)
+                {
+                        <td style="border-style: none">
+                            <input type="button" onclick="tryToMoveTransactionToPending(@lastTransactionID)" value="@this.LclRes("move transaction to pending")" />
+                            <br /><br /><br /><br />
+                        </td>      
+                }
+                everyoneAccepted = true;
+            }
+        }
+        </tr>
+        
+            lastTransactionID = item.transactionID;
+            if (item.userID == 0)
+            {
+        <script type="text/javascript">
+            document.getElementById("transactionName @(item.transactionID)").innerHTML += "<h4>@(item.description)</h4>";
+        </script>
+            }
+            else
+            {
+        <tr>
+            <td>@item.transactionID</td>
+            <td>
+                <div name='@item.userID' ></div>
+                <script type="text/javascript">
+                    userIdToName( '@(item.userID)' ); 
+                </script>
+            </td>
+            <td>
+                <div id="value @(i)"></div>
+                <script type="text/javascript">
+                    document.getElementById("value @(i)").innerHTML = valueDeconverter("@(item.value)");
+                </script>
+            </td>
+            <td>@item.currency</td>
+            <td>@item.date</td>
+            <td>@item.description</td>
+            <td align="center">
+                @if (@item.accepted != 0)
+                {
+                    @this.LclRes("true") <br />
+                }
+                else
+                {
+                    everyoneAccepted = false;
+                    if (((ulong)(ViewData["UserID"])) == item.userID)
+                    {
+                        <input type="button" onclick="acceptTransaction(@item.transactionID)" value="@this.LclRes("accept")" />
+                    }
+                    else
+                    {
+                        @this.LclRes("false") <br />
+                    }
+                }
+            </td>
+        </tr>
+            }
+            i = i + 1;
+    }
+    <tr>
+    <td><input type="button" onclick="deleteTransaction(@lastTransactionID)" value="delete transaction" /></td>
+    @if (lastTransactionID != 0 && everyoneAccepted == true)
+    {
+        <td><input type="button" onclick="tryToMoveTransactionToPending(@lastTransactionID)" value="@this.LclRes("move transaction to pending")" /></td>
+    }
+    </tr>
+
+</table>
+
+
+<br /><br /><fb:login-button autologoutlink="true"></fb:login-button>
+      

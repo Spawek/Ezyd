@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "PrivacyPolicy";
+}
+
+<h2>PrivacyPolicy</h2>
+
+<p>
+Privacy policy of my site:
+-be good!
+</p>
+
+<p>
+Time now: @ViewData["TimeNow"]
+</p>
+
+    nie mam pojęcia dlaczego to musi być w jakimś (jakimkolwiek) znaczniku (nawet < b > daje radę) - inaczej nie da się pisać tesktu wewnątrz
+
+<p>
+@{
+  
+    
+    foreach ( KeyValuePair<String, object> @obj in (System.Collections.Generic.IEnumerable<KeyValuePair<String, object>>) ViewData["me"] )
+    {
+        <b> 
+        @obj.Key; 
+        =
+        @obj.Value.ToString();
+        <br />    
+        </b>
+    }
+}
+</p>
+
+<p>
+
+<table>
+<tr><th>name</th><th>id</th></tr>
+
+
+
+@{
+    
+    foreach ( KeyValuePair<String, String> @pair in (System.Collections.Generic.IEnumerable<KeyValuePair<String, String>>)ViewData["friendsList"])
+    {   
+        <tr> 
+        <td>
+        @(((KeyValuePair<String, String>)(pair)).Key.ToString());
+        </td>
+        <td>
+        @(((KeyValuePair<String, String>)(pair)).Value.ToString());
+        </td> 
+        </tr>
+    }
+    
+}
+
+
+</table>
+</p>

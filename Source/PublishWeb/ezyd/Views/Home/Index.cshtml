@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@Html.Partial("_MyFacebookLogin", "Shared")
+
+<h2>@ViewBag.Message</h2>
+
+<p>
+    <li>
+        @this.LclRes("String1")
+        @Html.ActionLink(this.LclRes("String2"), "index", "transaction")
+        @this.LclRes("String3")
+    </li>
+</p>
+
+<p>
+    <li>
+        @this.LclRes("String4") @Html.ActionLink(this.LclRes("String5"), "index", "friends") @this.LclRes("String6") <br />
+        <dd><b>@this.LclRes("String7")</b></dd>
+        <dd>@this.LclRes("String8")</dd>
+    </li>
+</p>
+
+<p>
+    <li>
+        @this.LclRes("String9") @Html.ActionLink(this.LclRes("String10"), "index", "tutorial")
+    </li>
+</p>
+
+<br /><br /><fb:login-button autologoutlink="true"></fb:login-button>

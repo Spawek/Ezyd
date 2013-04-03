@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "FriendListDisplay";
+}
+
+<h2>@this.LclRes("Go back to") @Html.ActionLink(this.LclRes("friends menu"), "index")</h2>
+
+
+@Html.Partial("_MyFacebookLogin", "Shared")
+@Html.Partial("_EzydHelpers", "Shared")
+
+
+<table>
+<tr>
+    <td>@this.LclRes("ID")</td>
+    <td>@this.LclRes("name")</td>
+</tr>
+@{ int i = 0; }
+@foreach (var item in (System.Collections.Generic.IEnumerable<UInt64>)ViewData["friendList"])
+{
+    i = i+1;
+    <tr>
+    <td>@i</td>
+    <td>
+        <div name='@item' ></div>
+        <script type="text/javascript">
+            userIdToName('@item'); 
+        </script>
+    </td>
+    </tr>
+}
+</table>
+
+
+<br /><br /><fb:login-button autologoutlink="true"></fb:login-button>

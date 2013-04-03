@@ -1,0 +1,229 @@
+﻿@{
+    ViewBag.Title = "transactionOptimizator";
+}
+
+<h2>@this.LclRes("Go back to") @Html.ActionLink(this.LclRes("transactions menu"), "index")</h2>
+
+
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>  @* //TODO sprawdzić czy potrzebne i ew wyjebać *@
+@Html.Partial("_MyFacebookLogin", "Shared")
+@Html.Partial("_EzydHelpers", "Shared")
+
+<script type="text/javascript" charset="iso-8859-2">
+
+
+//copied from transaction creator and modified (simplyfied) //everything in this page done this way ;]
+    function transactionForm(thisObjectName) {
+
+        this.thisObjectName = thisObjectName; //if there is no name - delete does not work
+        this.whereToDisplay;
+        this.guyName = new Array();
+        this.guyId = new Array();
+        this.size = 0;
+
+        this.addGuy = function (guyName, guyId) {
+            if (this.size >= 10) {
+                alertUser('@this.LclRes("there cant be more than 10 users")')
+            }
+            else {
+                this.guyName[this.size] = guyName;
+                this.guyId[this.size] = guyId;
+
+                this.size++;
+                if (this.whereToDisplay != null || this.whereToDisplay != "") {
+                    this.display(this.whereToDisplay);
+                }
+                else {
+                    alertUser("whereToDisplay is empty in: " + this.listName);
+                }
+            }
+        }
+
+        this.deleteGuy = function (no) {
+            if (no < this.size && no >= 0) {
+                for (; no < this.size - 1; no++) {
+                    this.guyName[no] = this.guyName[no + 1];
+                    this.guyId[no] = this.guyId[no + 1];
+                }
+                this.size--;
+                if (this.whereToDisplay != null || this.whereToDisplay != "") {
+                    this.display(this.whereToDisplay);
+                }
+                else {
+                    alertUser("whereToDisplay is empty in: " + this.listName);
+                }
+            }
+        }
+
+        this.changeDisplayMode = function (newMode) {
+            this.mode = newMode;
+            this.display(this.whereToDisplay);
+        }
+
+        this.display = function (divID) {
+            this.whereToDisplay = divID;
+            var table = "";
+
+            table += "<br />"
+            table += "<input type='button' onclick='" + this.thisObjectName + ".sendForm()' value='@this.LclRes("send form")'>";
+            table += "<br />";
+
+            table += "<table border='1'> ";
+            table += "<tr> <td> @this.LclRes("ID") </td> <td> @this.LclRes("Name") </td> <td> @this.LclRes("Photo") </td> </tr> "; //top of the table
+            for (var i = 0; i < this.size; i++) {
+                table += "<tr>";
+                table += "<td>" + i + "</td>";
+                table += "<td>" + this.guyName[i] + "</td>";
+                table += "<td>" + "<img src='http://graph.facebook.com/" + this.guyId[i] + "/picture' />" + "</td>";
+                table += "<td>" + "<input type='button' onclick='" + this.thisObjectName + ".deleteGuy(" + i + ")' value='@this.LclRes("delete")' />" + "</td>"; //cos tutaj nie dziala kasowanie
+                table += "</tr> ";
+            }
+            
+            document.getElementById(this.whereToDisplay).innerHTML = table;
+        }
+
+        this.getGuyIDs = function () {
+            var guyIDs = Array();
+            for (var i = 0; i < this.size; i++) {
+
+                if (this.guyId[i] != -666) {
+                    guyIDs.push(this.guyId[i]);
+                }
+            }
+            return guyIDs;
+        }
+
+
+        this.sendForm = function () {
+            if (confirm('@Html.Raw(this.LclRes("Are you sure you want to optimize theese transactions?"))')) {
+                //TODO make it looking better
+                var ok = true;
+
+                var idsArr = this.getGuyIDs();
+
+                for (var i = 0; i < idsArr.length; i++) { //arrays should have equal length 
+                    if (idsArr[i] == -666.666) {
+                        ok = false;
+                    }
+                }
+
+                if (ok == true) {
+                    $.ajax(
+                    {
+                        type: "POST",
+                        traditional: true,
+                        url: "/Transaction/optimizeTransactions",
+                        data: { ids: idsArr}, 
+                        success: function (result) {
+                            if (result["ok"] == '1') {
+                                alertUser('@this.LclRes("optimization done")'); //TODO check if some optimization was done or not and return it
+                                location.reload("true");
+                            }
+                            else {
+                                alertUser(result["msg"]);
+                            }
+                        },
+                        error: function (req, status, error) {
+                            alertUser('@this.LclRes("Sorry! We could not receive your feedback at this time.")');
+                        }
+                    });
+                }
+            }
+        }
+    } 
+</script>
+
+<div id="form">
+    <script type="text/javascript">
+        var TransactionForm = new transactionForm("TransactionForm");
+        TransactionForm.display("form");
+        TransactionForm.addGuy("@ViewData["UserName"]", "@ViewData["UserID"]");
+    </script>
+</div>
+
+<script type="text/javascript">
+    var FLdone = false;
+    var friendListNames = new Array();
+    var friendListIds = new Array();
+
+    function getFL() {
+        FB.api("/me/friends", { fields: 'id,name' }, function (response) {
+            for (var key in response.data) {
+                friendListIds.push(response.data[key].id);
+                friendListNames.push(response.data[key].name);
+            }
+        });
+        FLdone = true;
+    }
+
+    function findFriends2(name) {
+        if (!FLdone) {
+            getFL();
+        }
+        if (name == "") {
+            table = ""
+        }
+        else {
+            var pattern = new RegExp(name, 'i'); //if string contains the name (letter cases are not important)
+            var friends2 = "<table>";
+            for (var i = 0; i < friendListNames.length; i++) {
+                if (pattern.test(friendListNames[i])) {
+                    friends2 += "<tr>";
+                    friends2 += "<td>" + friendListNames[i] + "</td><td> " + "<img src='http://graph.facebook.com/" + friendListIds[i] + "/picture' /></td>";
+                    buttonOnClick = "TransactionForm.addGuy('" + friendListNames[i] + "','" + friendListIds[i] + "')"; //nie wygląda to za ładnie ale działa ;)
+                    buttonOnClick = 'onclick="' + buttonOnClick + '"';
+                    friends2 += "<td> <input type='button' " + buttonOnClick + " value='@this.LclRes("add")' /> </td>";
+                    friends2 += "</tr>";
+                }
+            }
+            friends2 += "</table>";
+        }
+
+        document.getElementById("findFriends2").innerHTML = friends2;
+    }
+</script>
+<div id="friendlistSearchEngine">
+    <h5>@this.LclRes("Friendlist search engine")</h5>
+    <input type="text" value="@this.LclRes("firstname lastname")" id="friendName2" onkeyup="findFriends2(this.value)" />
+    <input type="button" value="@this.LclRes("search")" onclick="findFriends2(document.getElementById('friendName2').value)" />
+</div>
+<div id="findFriends2"></div>
+
+
+<div id="friendNameInput">
+    <br />
+    <h5>@this.LclRes("Facebook friends search engine")</h5>
+    <input type="text" value="@this.LclRes("firstname lastname")" id="friendName" /> @* onkeypress="findFriends(this.value)" /> to też było wkurwiające *@
+    <input type="button" value="@this.LclRes("search")" onclick="findFriends(document.getElementById('friendName').value)" />
+    <br />
+    <br />
+</div>
+<div id="findFriends">
+</div>
+<script type="text/javascript">
+    function findFriends(name) {
+        var params = {};
+        params["q"] = name;
+        params["type"] = "user";
+        FB.api("/search", params, function (response) {
+            var friends = "<table>";
+            for (key in response.data) {
+                friends += "<tr>";
+                var hyperLink = "'http://facebook.com/" + response.data[key].id + "'";
+                friends += "<td><a href=" + hyperLink + ">" + response.data[key].name + "</a></td>";
+                friends += "<td><img src='http://graph.facebook.com/" + response.data[key].id + "/picture' /></td>";
+                buttonOnClick = "TransactionForm.addGuy('" + response.data[key].name.toString() + "','" + response.data[key].id.toString() + "')"; //nie wygląda to za ładnie ale działa ;)
+                buttonOnClick = 'onclick="' + buttonOnClick + '"';
+                friends += "<td> <input type='button' " + buttonOnClick + " value='@this.LclRes("add")' /> </td>";
+                friends += "</tr>";
+            }
+            friends += "</table>";
+
+            document.getElementById("findFriends").innerHTML = friends;
+        });
+    }
+    
+</script>
+
+
+<fb:login-button autologoutlink="true"></fb:login-button>

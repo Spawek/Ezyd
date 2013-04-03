@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "AcceptFriendInvitations";
+}
+
+<h2>@this.LclRes("Go back to") @Html.ActionLink(this.LclRes("friends menu"), "index")</h2>
+
+@Html.Partial("_MyFacebookLogin", "Shared")
+@Html.Partial("_EzydHelpers", "Shared")
+
+
+<script type="text/javascript">
+    this.acceptFInv = function (guyId) {
+        if (confirm('@Html.Raw(this.LclRes("Are you sure you want to accept friend invitation"))')) {
+            $.ajax(
+                {
+                    type: "POST",
+                    traditional: true,
+                    url: "/Friends/AcceptFriendInv",
+                    data: { FId: guyId },
+                    success: function (result) {
+                        if (result["ok"] == '1') {
+                            alert('@this.LclRes("friend invitation has accepted")');
+                            location.reload("true");
+                        }
+                        else {
+                            alert(result["msg"]);
+                        }
+                    },
+                    error: function (req, status, error) {
+                        alert('@this.LclRes("Sorry! We could not receive your feedback at this time.")');
+                    }
+                });
+        }
+    }
+</script>
+
+
+<table>
+<tr>
+<td>@this.LclRes("ID")</td>
+<td>@this.LclRes("name")</td>
+</tr>
+@{ int i = 0; }
+@foreach (var item in (System.Collections.Generic.IEnumerable<UInt64>)ViewData["friendInvs"])
+{
+    i = i+1;
+    <tr>
+    <td>@i</td>
+    <td>
+        <div name='@item' ></div>
+        <script type="text/javascript">
+            userIdToName('@item'); 
+        </script>
+    </td>
+    <td>
+        <input type="button" value="accept" onclick="acceptFInv(@item)" />
+    </td>
+    </tr>
+}
+</table>
+
+<br /><br /><fb:login-button autologoutlink="true"></fb:login-button>

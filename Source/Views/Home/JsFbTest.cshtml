@@ -1,0 +1,234 @@
+﻿@{
+    ViewBag.Title = "JsFbTest";
+}
+
+<h2>JsFbTest</h2>
+
+<br />
+@ViewData["msg"]
+<br />
+
+<div id="fb-root"></div> 
+
+<script type="text/javascript" src='//connect.facebook.net/en_US/all.js'>
+//bez tego nie dziala na chromie
+</script>
+
+<script type="text/javascript">    
+//bez tego nie dziala na operze
+    (function () {
+        var e = document.createElement('script');
+        e.type = 'text/javascript';
+        e.src = document.location.protocol +
+            '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+    } ());
+//na IE działa chujowo ale działa
+</script>
+
+
+
+
+<script type="text/javascript">
+window.fbAsyncInit = function() {
+    FB.init({ appId: '241822175888190', status: true, cookie: true, xfbml: true, oauth: true });
+ 
+     /* All the events registered */
+     FB.Event.subscribe('auth.login', function(response) {
+         // do something with response
+         //login(); //TODO fix it //I dont know if i need it
+     });
+     FB.Event.subscribe('auth.logout', function(response) {
+         // do something with response
+         //logout(); //TODO fix it
+     });
+ 
+     FB.getLoginStatus(function(response) {
+         if (response.session) {
+             // logged in and connected user, someone you know
+             login();
+         }
+     });
+ };
+ </script>
+
+ <br /> <br />
+
+ <script type="text/javascript" id="MaMM">
+
+     function transactionForm(thisObjectName) {
+
+         this.thisObjectName = thisObjectName; //if there is no name - delete does not work
+         this.whereToDisplay;
+         this.guyName = new Array();
+         this.guyId = new Array();
+         this.size = 0;
+
+         this.addGuy = function (guyName, guyId) {
+             this.guyName[this.size] = guyName;
+             this.guyId[this.size] = guyId;
+             this.size++;
+             if (this.whereToDisplay != null || this.whereToDisplay != "") {
+                 this.display(this.whereToDisplay);
+             }
+             else {
+                 alert("whereToDisplay is empty in: " + this.listName);
+             }
+         }
+
+         this.deleteGuy = function (no) {
+             if (no < this.size && no >= 0) {
+                 for (; no < this.size - 1; no++) {
+                     this.guyName[no] = this.guyName[no + 1];
+                     this.guyId[no] = this.guyId[no + 1];
+                 }
+                 this.size--;
+                 if (this.whereToDisplay != null || this.whereToDisplay != "") {
+                     this.display(this.whereToDisplay);
+                 }
+                 else {
+                     alert("whereToDisplay is empty in: " + this.listName);
+                 }
+             }
+         }
+
+         this.display = function (divID) {
+             this.whereToDisplay = divID;
+             var table;
+             table += "<form action='TestOutput' id='transactionForm' method='get'> ";
+             table += "<table border='1'> ";
+             table += "<tr> <td> Name </td> <td> Photo </td> <td> value </td> <td> delete </td> </tr> "; //top of the table
+             for (var i = 0; i < this.size; i++) {
+                 table += "<tr>";
+                 table += "<td>" + this.guyName[i] + "</td>";
+                 table += "<td>" + "<img src='http://graph.facebook.com/" + this.guyId[i] + "/picture' />" + "</td>";
+                 table += "<td>" + "<input type='text' name='formValue' />" + "</td>";
+                 table += "<td>" + "<input type='button' onclick='" + this.thisObjectName + ".deleteGuy(" + i + ")' value='delete' />" + "</td>"; //cos tutaj nie dziala kasowanie
+                 table += "</tr> ";
+             }
+             table += "<input type='submit' value='send' />"
+             table += "</form>"
+
+             document.getElementById(this.whereToDisplay).innerHTML = table;
+         }
+
+         this.buildSendingUlr = function () { //ktoś może robić transakcje z nieznajomymi //do tego każdy może spamować - trzeba captche
+             var Url = "";
+             for (var i = 0; i < this.size; i++) {
+                 Url += this.guyId[i] + "><";
+                 Url += document.getElementsByName('formValue')[i].value;
+                 if (i != this.size - 1) {
+                     Url += "+";
+                 }
+             }
+             alert(Url);
+             return Url;
+         }
+
+         this.sendForm = function () {
+             $.ajax(
+            {
+                type: "POST",
+                url: "/home/JsFbTest",
+                data: "author=a" + "&email=b" + "&comment=c",
+                success: function (result) {
+                    if (result.success) $("#feedback input").attr("value", ""); // clear all the input fields on success
+                    $("#feedback_status").slideDown(250).text(result.message); // show status message with animation
+                },
+                error: function (req, status, error) {
+                    alert("Sorry! We could not receive your feedback at this time.");
+                }
+            });
+         }
+     }
+ 
+</script>
+
+
+<div id="form">
+    <script type="text/javascript">
+        var TransactionForm = new transactionForm("TransactionForm");
+        TransactionForm.display("form");
+        TransactionForm.addGuy('Maciek Oziębły', '100000907961641');
+    </script>
+</div>
+
+
+<br /> <br />
+
+<script type="text/javascript">
+    sendFormFoo = function () {
+        parent.location += "?";
+        parent.location += TransactionForm.buildSendingUlr();
+    }
+</script>
+
+<div id="formSendingButton">
+    <input type="button" value="send form2" onclick="sendFormFoo()" />
+</div>
+
+<div id="formSendingButton2">
+    <input type="button" value="send form" onclick="TransactionForm.sendForm()" />
+</div>
+
+<br /> <br />
+
+ <fb:login-button autologoutlink="true"></fb:login-button>
+
+ <script type="text/javascript">
+     function ktoJa() {
+         FB.api('/me', function (response) {
+             alert('Your name is ' + response.name);
+         });
+     }
+</script>
+<input type="button", value="kto ja", onclick="ktoJa()" />
+
+@* 
+<div id="koledzy"></div>
+ <script type="text/javascript">
+     function pokazKolegow() {
+         FB.api("/me/friends", function (response) {
+             var friends = "<table>";
+             for (key in response.data) {
+                 friends += "<tr> <td> " + key + "</td> <td>" + response.data[key].id + "</td> <td>" + response.data[key].name + "</td></tr>";
+             }
+             friends += "</table>";
+
+             document.getElementById("koledzy").innerHTML = friends;
+         });
+     }
+</script>
+<input type="button", value="kto ja", onclick="pokazKolegow()" />
+*@
+
+<div id="friendNameInput">
+    <input type="text" value="imie nazwisko" id="friendName" onkeypress="findFriends(this.value)" />
+</div>
+
+<div id="findFriends"></div>
+<script type="text/javascript">
+    function findFriends(name) {
+        var params = {};
+        params["q"] = name;
+        params["type"] = "user";
+        FB.api("/search", params, function (response) {
+            var friends = "<table>";
+            for (key in response.data) {
+                friends += "<tr>";
+                friends += "<td>" + response.data[key].id + "</td> <td>" + response.data[key].name + "</td><td> " + "<img src='http://graph.facebook.com/" + response.data[key].id + "/picture' /></td>";
+                buttonOnClick = "TransactionForm.addGuy('" + response.data[key].name.toString() + "','" + response.data[key].id.toString() + "')"; //nie wygląda to za ładnie ale działa ;)
+                buttonOnClick = 'onclick="' + buttonOnClick + '"';
+                friends += "<td> <input type='button' " + buttonOnClick + " value='add' /> </td>";
+                friends += "</tr>";
+            }
+            friends += "</table>";
+
+            document.getElementById("findFriends").innerHTML = friends;
+        });
+    }
+
+</script>
+
+

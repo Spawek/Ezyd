@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "friendlistTutorial";
+}
+
+<h2>@this.LclRes("Go back to") @Html.ActionLink(this.LclRes("tutorial menu"), "index", "tutorial")</h2>
+
+<h3>@this.LclRes("String1")</h3>
+<img src="@Url.Content(this.LclRes("Img1"))" alt="friends tutorial pic"/>
+<br />
+
+<h3>@this.LclRes("String2");</h3>
+<img src="@Url.Content(this.LclRes("Img2"))" alt="friends tutorial pic"/> 
+<br />
+
+<h3>@this.LclRes("String3")</h3>
+<img src="@Url.Content(this.LclRes("Img3"))" alt="friends tutorial pic"/> 
+<br />
+
+<h3>@this.LclRes("String4")</h3>
+<img src="@Url.Content(this.LclRes("Img4"))" alt="friends tutorial pic"/> 

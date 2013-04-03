@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@Html.Partial("_MyFacebookLogin", "Shared")
+
+<h2>@this.LclRes("Transactions menu")</h2>
+
+
+<div id="transactionMenu">
+
+    <h2>@this.LclRes("Choose your action:")</h2>
+    <h4>
+        @Html.ActionLink(this.LclRes("create new transactions"), "transactionCreator") <br /> <br />
+        @Html.ActionLink(this.LclRes("transactions requests"), "transactionRequests") <br /> <br />
+        @Html.ActionLink(this.LclRes("pending transactions"), "transactionPending")<br /><br />
+        @Html.ActionLink(this.LclRes("accepted transactions history"), "acceptedTransactionsHistory")<br /><br />
+        @Html.ActionLink(this.LclRes("payment history"), "paymentHistory")<br /><br />
+        @Html.ActionLink(this.LclRes("cancelled transactions"), "transactionCancelled")<br /><br />
+        @Html.ActionLink(this.LclRes("transactions optimalizer"), "transactionOptimizator")<br /><br />
+    </h4>
+
+</div>
+
+<div id="loginButton">
+    <fb:login-button autologoutlink="true"></fb:login-button>
+</div>

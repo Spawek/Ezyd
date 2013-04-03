@@ -1,0 +1,158 @@
+﻿@{
+    ViewBag.Title = "TableInput";
+}
+
+<h2>TableInput</h2>
+
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.6.4.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui-1.8.16.custom.min.js")"></script>	
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#dialog-confirm").dialog({
+            autoOpen: false,
+            resizable: false,
+            height: 240,
+            modal: true,
+            buttons: {
+                "Tak": function () {
+                    $(this).data('this').parent().parent().remove();
+                    $(this).dialog("close");
+                },
+                "Nie": function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+
+
+        $("#dialog-form").dialog({
+            autoOpen: false,
+            height: 500,
+            width: 650,
+            modal: true,
+            buttons: {
+                "Dodaj użytkownika": function () {
+                    $("#users tbody").append("<tr>" +
+					"<td>" + $("#imie").val() + "</td>" +
+					"<td>" + $("#nazwisko").val() + "</td>" +
+					"<td>" + $("#miasto").val() + "</td>" +
+					"<td>" + $("#kod").val() + "</td>" +
+					"<td>" + $("#data").val() + "</td>" +
+					'<td> <button class="usun">X</button> </td>' +
+				"</tr>");
+                    $(".usun").button()
+			           	.click(function () {
+			           	    $("#dialog-confirm").data('this', $(this)).dialog("open");
+			           	});
+                    $(this).dialog("close");
+                },
+                "Anuluj": function () {
+                    $(this).dialog("close");
+                }
+            },
+
+            close: function () {
+            }
+
+        });
+
+        $("#add")
+		.button()
+		.click(function () {
+		    $("#dialog-form").dialog("open");
+		});
+
+        $(".usun").button()
+           	.click(function () {
+           	    $("#dialog-confirm").data('this', $(this)).dialog("open");
+           	    //$(this).parent().parent().remove(); //TODO nie ma tego?? - sprawdzic
+           	});
+
+        $("#data").datepicker();
+        $("#data").datepicker("option", "dateFormat", "dd-mm-yy");
+
+    });	
+
+</script>
+
+<div id="dialog-confirm" title="Usunąć?">
+
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Czy na pewno usunąć tą pozycję?</p>
+
+</div>
+
+
+<div id="dialog-form" title="Dodaj użytkownika">
+
+	<p class="validateTips">All form fields are required.</p>
+
+	<form>
+
+	    <fieldset>
+
+		    <label for="imie">Imię: </label>
+		    <input type="text" name="imie" id="imie" class="text ui-widget-content ui-corner-all" /><br />
+
+		    <label for="nazwisko">Nazwisko: </label>
+		    <input type="text" name="nazwisko" id="nazwisko" value="" class="text ui-widget-content ui-corner-all" /><br />
+
+		    <label for="miasto">Miasto: </label>
+		    <input type="text" name="miasto" id="miasto" value="" class="text ui-widget-content ui-corner-all" /><br />
+
+		    <label for="kod">Kod pocztowy: </label>
+		    <input type="text" name="kod" id="kod" value="" class="text ui-widget-content ui-corner-all" /><br />
+
+		    <label for="data">Data urodzenia: </label>
+		    <input type="text" name="data" id="data" value="" class="text ui-widget-content ui-corner-all" />								
+
+	    </fieldset>
+
+	</form>
+
+</div>
+
+	
+
+<div class="ui-widget">
+
+	<h2>Tabela danych:</h2>
+
+	<table id="users" cellpadding="5" class="ui-widget ui-widget-content">
+		<thead>
+			<tr class="ui-widget-header ">
+
+				<th>Imię</th>
+				<th>Nazwisko</th>
+				<th>Miasto</th>
+				<th>Kod pocztowy</th>
+				<th>Data urodzenia</th>
+
+				<th></th>
+
+			</tr>
+
+		</thead>
+
+		<tbody>
+
+			<tr>
+
+				<td>Mateusz</td>
+				<td>Lewandowski</td>
+				<td>Inowrocław</td>
+				<td>88-100</td>
+				<td>14-10-1991</td>
+				<td><button class="usun">X</button></td>
+
+			</tr>
+
+		</tbody>
+
+	</table>
+
+	<button id="add">Dodaj</button>
+
+</div>
