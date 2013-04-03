@@ -111,7 +111,7 @@ namespace ezyd.Controllers
         {
             try
             {
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
                 ViewData["UserID"] = result.id;
                 ViewData["UserName"] = result.name;
@@ -179,7 +179,7 @@ namespace ezyd.Controllers
         {
             try
             {
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
                 ViewData["UserID"] = Convert.ToUInt64(result.id);
 
@@ -225,7 +225,7 @@ namespace ezyd.Controllers
         {
             try
             {
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
                 ViewData["UserID"] = Convert.ToUInt64(result.id);
 
@@ -271,7 +271,7 @@ namespace ezyd.Controllers
         {
             try
             {
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
                 ViewData["UserID"] = Convert.ToUInt64(result.id);
 
@@ -320,7 +320,7 @@ namespace ezyd.Controllers
         {
             BadCharsRemover.RemoveBadChars(ref TId);
 
-            var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+            var fbApp = new FacebookClient(Session["accessToken"].ToString());
             dynamic result = fbApp.Get("me");
             
             var DB = new EzydInstantDB();
@@ -349,7 +349,7 @@ namespace ezyd.Controllers
 	        {
                 BadCharsRemover.RemoveBadChars(ref TId);
 
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
 
                 var DB = new EzydInstantDB();
@@ -381,7 +381,7 @@ namespace ezyd.Controllers
 
                 var DB = new EzydInstantDB();
 
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
 
                 var set = new TReqSet(DB, Convert.ToUInt32(TId));
@@ -405,7 +405,7 @@ namespace ezyd.Controllers
         {
             try
             {
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
                 ViewData["UserID"] = Convert.ToUInt64(result.id);
                 UInt64 UId = Convert.ToUInt64(result.id);
@@ -474,7 +474,7 @@ namespace ezyd.Controllers
 
                 var DB = new EzydInstantDB();
 
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
 
                 var historyRec = new THisRec(DB, Convert.ToUInt32(TId), Convert.ToUInt64(minusGuyID), Convert.ToUInt64(result.id));
@@ -508,7 +508,7 @@ namespace ezyd.Controllers
 
                 var DB = new EzydInstantDB();
 
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
 
                 if (result.id != minusGuyID && result.id == plusGuyID)
@@ -549,7 +549,7 @@ namespace ezyd.Controllers
 
                 var DB = new EzydInstantDB();
 
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
 
                 if (result.id != minusGuyID && result.id == plusGuyID)
@@ -582,7 +582,7 @@ namespace ezyd.Controllers
         {
             try
             {
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
                 ViewData["UserID"] = Convert.ToUInt64(result.id);
                 UInt64 UId = Convert.ToUInt64(result.id);
@@ -631,7 +631,7 @@ namespace ezyd.Controllers
         {
             try
             {
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
                 ViewData["UserID"] = result.id;
                 ViewData["UserName"] = result.name;
@@ -667,7 +667,7 @@ namespace ezyd.Controllers
                 for (int i = 0; i < ids.Length; i++)
                     BadCharsRemover.RemoveBadChars(ref ids[i]);
 
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
 
                 dynamic result = fbApp.Get("me");
                 var usersList = new List<UInt64>(ids.Length);

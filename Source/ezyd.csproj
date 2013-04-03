@@ -450,6 +450,12 @@
   <ItemGroup>
     <Content Include="Views\Tutorial\App_LocalResources\whyUErrorToMeCartooon.cshtml.pl-PL.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Copy of _MyFacebookLogin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\ezyd.pubxml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

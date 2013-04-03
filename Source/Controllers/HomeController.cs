@@ -248,6 +248,21 @@ namespace ezyd.Controllers
         }
         */
 
+        public class FacebookLoginModel
+        {
+            public string uid { get; set; }
+            public string accessToken { get; set; }
+        }
+
+        [HttpPost]
+        public JsonResult FacebookLogin(FacebookLoginModel model)
+        {
+            Session["uid"] = model.uid;
+            Session["accessToken"] = model.accessToken;
+
+            return Json(new { success = true });
+        }
+
         public ActionResult About()
         {
             return View();

@@ -1,63 +1,63 @@
-﻿<div id="fb-root">
-</div>
-@* to też potrzebne *@
-<script type="text/javascript" src='//connect.facebook.net/en_US/all.js'>
-    //bez tego nie dziala na chromie
-</script>
-<script type="text/javascript">
-    //bez tego nie dziala na operze
-    (function () {
-        var e = document.createElement('script');
-        e.type = 'text/javascript';
-        e.src = document.location.protocol +
-            '//connect.facebook.net/en_US/all.js';
-        e.async = true;
-        document.getElementById('fb-root').appendChild(e);
-    } ());
-    //na IE działa chujowo ale działa
-</script>
-<script type="text/javascript">
+﻿<div id="fb-root"></div>
+<script>//function InitialiseFacebook(appId) {
+
     window.fbAsyncInit = function () {
         FB.init({
             appId: '241822175888190',
             status: true,
             cookie: true,
-            xfbml: true,
-            oauth: true,
-            channelUrl: "http://ezydapplication.no-ip.org/" //FROM: http://piotrekkr.info/2010/11/opera-facebook-problemy/ //TODO: its not working at opera anyway ;/ - FIX IT
+            xfbml: true
         });
 
-        if (window.opera) //FROM: http://piotrekkr.info/2010/11/opera-facebook-problemy/
-        {
-	        // zmieniam tranport na postmessage
-	        // bo opera nie radzi sobie z domyślnym
-	        FB.XD._transport="postmessage";
-	        FB.XD.PostMessage.init();
-	    }
-
-        /* All the events registered */
         FB.Event.subscribe('auth.login', function (response) {
-            // do something with response
-            //login(); //TODO fix it //I dont know if i need it
-        });
-        FB.Event.subscribe('auth.logout', function (response) {
-            // do something with response
-            //logout(); //TODO fix it
+            var credentials = { uid: response.authResponse.userID, accessToken: response.authResponse.accessToken };
+            SubmitLogin(credentials);
         });
 
         FB.getLoginStatus(function (response) {
-            if (response.session) {
-                // logged in and connected user, someone you know
-                login();
+            if (response.status === 'connected') {
+                //alert("user is logged into fb");
             }
+            else if (response.status === 'not_authorized') {
+                //alert("user is not authorised");
+            }
+            else {
+                //alert("user is not conntected to facebook");
+            }
+
         });
+
+        function SubmitLogin(credentials) {
+            $.ajax({
+                url: "/Home/facebooklogin",
+                type: "POST",
+                data: credentials,
+                error: function () {
+                    alert("error logging in to your facebook account.");
+                },
+                success: function () {
+                    @if(Session["accessToken"] == null)
+                    {
+                        <text>
+                            window.location.reload();
+                        </text>
+                    }
+                }
+            });
+        }
+
     };
 
-    //FROM: http://piotrekkr.info/2010/11/opera-facebook-problemy/
-    (function () {
-        var e = document.createElement('script'); e.async = true;
-        e.src = document.location.protocol +
-		'//connect.facebook.net/en_US/all.js';
-        document.getElementById('fb-root').appendChild(e);
-    } ());
+    (function (d) {
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement('script');
+        js.id = id;
+        js.async = true;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        ref.parentNode.insertBefore(js, ref);
+    }(document));
+
 </script>

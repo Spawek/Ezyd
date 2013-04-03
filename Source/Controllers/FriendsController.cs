@@ -111,7 +111,7 @@ namespace ezyd.Controllers
         {
             try
             {
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
 
                 UInt64 UId = Convert.ToUInt64(result.id);
@@ -161,7 +161,7 @@ namespace ezyd.Controllers
         {
             try
             {
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
             }
             catch (NullReferenceException)
             {
@@ -193,7 +193,7 @@ namespace ezyd.Controllers
 
                 var DB = new EzydInstantDB();
 
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
 
                 DB.sendFriendInv(result.id, FId);
@@ -217,7 +217,7 @@ namespace ezyd.Controllers
         {
             try
             {
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
 
                 UInt64 UId = Convert.ToUInt64(result.id);
@@ -270,7 +270,7 @@ namespace ezyd.Controllers
 
                 var DB = new EzydInstantDB();
 
-                var fbApp = new FacebookClient(this.FacebookSession.AccessToken);
+                var fbApp = new FacebookClient(Session["accessToken"].ToString());
                 dynamic result = fbApp.Get("me");
 
                 DB.acceptFriendInv(result.id, FId);
